@@ -1,99 +1,111 @@
 <template>
-  <div class="stock_list">
-    <el-input
-            v-model="search"
-            size="mini"
-            placeholder="查询"/>
+  <div class="share_list">
     <el-table
             @sort-change="sortChange"
-            :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+            :data="shares_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             style="width: 100%"
             stripe>
       <el-table-column
-              prop="ts_code"
+              prop="ts_code_id"
               label="股票代码">
-        <template slot-scope="scope">
-          <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}</el-link>
-        </template>
       </el-table-column>
       <el-table-column
-              prop="name"
-              label="名称">
+              prop="end_date"
+              label="分红年度">
       </el-table-column>
       <el-table-column
-              prop="area"
-              label="地区">
+              prop="ann_date"
+              label="预案公告日">
       </el-table-column>
       <el-table-column
-              prop="industry"
-              label="行业">
+              prop="div_proc"
+              label="实施进度">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="list_date"
-              label="上市日期">
+              prop="stk_div"
+              label="每股转送">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="share_times"
-              label="分红次数">
+              prop="stk_bo_rate"
+              label="每股转送比例">
       </el-table-column>
+      <el-table-column
+              prop="stk_co_rate"
+              label="每股转增比例">
+      </el-table-column>
+      <el-table-column
+              prop="cash_div"
+              label="每股分红（税后）">
+      </el-table-column>
+      <el-table-column
+              prop="cash_div_tax"
+              label="每股分红（税前）">
+      </el-table-column>
+      <el-table-column
+              prop="record_date"
+              label="股权登记日">
+      </el-table-column>
+      <el-table-column
+              prop="ex_date"
+              label="除权登记日">
+      </el-table-column>
+      <el-table-column
+              prop="pay_date"
+              label="派息日">
+      </el-table-column>
+      <el-table-column
+              prop="div_listdate"
+              label="红股上市日">
+      </el-table-column><el-table-column
+            prop="imp_ann_date"
+            label="实施公告日">
+    </el-table-column><el-table-column
+            prop="base_date"
+            label="基准日">
+    </el-table-column><el-table-column
+            prop="base_share"
+            label="基准股本（万">
+    </el-table-column>
     </el-table>
     <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[50, 100, 200, 400]"
+            :page-sizes="[20, 100, 200, 400]"
             :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="stocks_back.length">
+            :total="shares_back.length">
       >
     </el-pagination>
   </div>
 </template>
 
 <script>
-  import {request} from "../network/request";
-
   export default {
-    name: "StockList",
+    name: "ShareList",
     components: {},
     props: {
-      stocks: {
+      shares: {
         type: Array,
         default: []
       }
     },
     data() {
       return {
-        stocks_back: this.stocks,
+        shares_back: this.shares,
         search: '',
         currentPage: 1,
-        pageSize: 50,
+        pageSize: 20,
       }
     },
     watch: {
-      search(val, oldVal) {
-        this.stocks_back = this.stocks.filter(item => {
-          // console.log(item['ts_code'].indexOf(val) !== -1)
-          return item['ts_code'].indexOf(val) !== -1 || item['name'].indexOf(val) !== -1 || item['area'].indexOf(val) !== -1 || item['industry'].indexOf(val) !== -1
-        })
-      },
-      stocks() {
+      shares() {
         //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
         // console.log('watch stock');
-        this.stocks_back = this.stocks
+        this.shares_back = this.shares
       }
     },
     methods: {
-      stockDetail(row) {
-        this.$router.push({
-          path:'/stock_detail',
-          query:{
-            ts_code:row['ts_code']
-          }
-        })
-      },
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage
       },

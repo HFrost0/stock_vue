@@ -6,12 +6,32 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    meta: {
-      title: '股票们'
-    },
-    component: () => import('../views/Home')
+    redirect:'/stocks'
   },
+  {
+    path: '/stocks',
+    name: 'Stocks',
+    meta: {
+      title: '股票列表'
+    },
+    component: () => import('../views/Stocks')
+  },
+  {
+    path:'/stock_detail',
+    name:'StockDetail',
+    meta: {
+      title: '股票详情'
+    },
+    component:()=>import('../views/StockDetail')
+  },
+  {
+    path: '/shares',
+    name: 'Shares',
+    meta:{
+      title:'分红'
+    },
+    component: ()=> import('../views/Shares')
+  }
 ]
 
 const router = new VueRouter({
