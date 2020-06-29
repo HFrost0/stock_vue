@@ -1,19 +1,24 @@
+<!--针对share的全部进行后端分页-->
 <template>
   <div class="share_list">
     <el-table
             @sort-change="sortChange"
-            :data="shares_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+            :data="shares_back"
             style="width: 100%"
             stripe>
       <el-table-column
               prop="ts_code_id"
               label="股票代码">
+        <template slot-scope="scope">
+          <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
+        </template>
       </el-table-column>
       <el-table-column
               prop="end_date"
               label="分红年度">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="ann_date"
               label="预案公告日">
       </el-table-column>
@@ -38,6 +43,7 @@
               label="每股分红（税后）">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="cash_div_tax"
               label="每股分红（税前）">
       </el-table-column>
@@ -56,25 +62,26 @@
       <el-table-column
               prop="div_listdate"
               label="红股上市日">
-      </el-table-column><el-table-column
-            prop="imp_ann_date"
-            label="实施公告日">
-    </el-table-column><el-table-column
-            prop="base_date"
-            label="基准日">
-    </el-table-column><el-table-column
-            prop="base_share"
-            label="基准股本（万">
-    </el-table-column>
+      </el-table-column>
+      <el-table-column
+              prop="imp_ann_date"
+              label="实施公告日">
+      </el-table-column>
+      <el-table-column
+              prop="base_date"
+              label="基准日">
+      </el-table-column>
+      <el-table-column
+              prop="base_share"
+              label="基准股本（万">
+      </el-table-column>
     </el-table>
     <el-pagination
-            @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[20, 100, 200, 400]"
             :page-size="pageSize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="shares_back.length">
+            layout="total, prev, pager, next, jumper"
+            :total="total_back">
       >
     </el-pagination>
   </div>
@@ -85,46 +92,49 @@
     name: "ShareList",
     components: {},
     props: {
+      total: {
+        type: Number,
+      },
       shares: {
         type: Array,
-        default: []
       }
     },
     data() {
       return {
+        total_back: this.total,
         shares_back: this.shares,
-        search: '',
         currentPage: 1,
-        pageSize: 20,
+        pageSize: 10,
       }
     },
     watch: {
+      total() {
+        this.total_back = this.total
+      },
       shares() {
         //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
-        // console.log('watch stock');
         this.shares_back = this.shares
       }
     },
     methods: {
+      stockDetail(row) {
+        this.$router.push({
+          path:'/stock_detail',
+          query:{
+            ts_code:row['ts_code_id']
+          }
+        })
+      },
       handleCurrentChange(currentPage) {
         this.currentPage = currentPage
-      },
-      handleSizeChange(size) {
-        this.pageSize = size;
+        // 请求服务端刷新数据
+        const offset = (currentPage - 1) * this.pageSize
+        this.$emit('pageChange', offset, this.pageSize)
       },
       //bug：在搜索后排序图标仍然保持高亮，但已经恢复默认排序
       sortChange(context) {
-        console.log(context);
         if (context.order === 'ascending' || context.order === 'descending') {
-          this.stocks_back.sort((a, b) => {
-            let result
-            if (context.prop === 'list_date') {
-              result = new Date(a[context.prop]) - new Date(b[context.prop])
-            } else {
-              result = a[context.prop] - b[context.prop]
-            }
-            return context.order === 'ascending' ? result : -result
-          })
+          this.$emit('sortChange', context)
           this.currentPage = 1
         }
       }

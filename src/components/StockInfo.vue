@@ -3,7 +3,7 @@
   <div>
     <h1>{{stock['ts_code']}}</h1>
     <h2>{{stock['name']}}</h2>
-    <p>{{stock['industry']}}</p>
+<!--    <p>{{stock['industry']}}</p>-->
   </div>
 </template>
 

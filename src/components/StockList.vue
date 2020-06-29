@@ -102,7 +102,6 @@
       },
       //bug：在搜索后排序图标仍然保持高亮，但已经恢复默认排序
       sortChange(context) {
-        console.log(context);
         if (context.order === 'ascending' || context.order === 'descending') {
           this.stocks_back.sort((a, b) => {
             let result

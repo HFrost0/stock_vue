@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect:'/stocks'
+    redirect: '/stocks'
   },
   {
     path: '/stocks',
@@ -17,21 +17,21 @@ const routes = [
     component: () => import('../views/Stocks')
   },
   {
-    path:'/stock_detail',
-    name:'StockDetail',
+    path: '/stock_detail',
+    name: 'StockDetail',
     meta: {
       title: '股票详情'
     },
-    component:()=>import('../views/StockDetail')
+    component: () => import('../views/StockDetail')
   },
   {
     path: '/shares',
     name: 'Shares',
-    meta:{
-      title:'分红'
+    meta: {
+      title: '分红'
     },
-    component: ()=> import('../views/Shares')
-  }
+    component: () => import('../views/Shares')
+  },
 ]
 
 const router = new VueRouter({
