@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import {request} from "../network/request";
+  import {formatDate} from "../common/utils";
 
   export default {
     name: "StockList",
@@ -66,7 +66,7 @@
     },
     data() {
       return {
-        stocks_back: this.stocks,
+        stocks_back: this.stocks.map(formatDate),
         search: '',
         currentPage: 1,
         pageSize: 50,
@@ -78,11 +78,12 @@
           // console.log(item['ts_code'].indexOf(val) !== -1)
           return item['ts_code'].indexOf(val) !== -1 || item['name'].indexOf(val) !== -1 || item['area'].indexOf(val) !== -1 || item['industry'].indexOf(val) !== -1
         })
+        this.currentPage = 1
       },
       stocks() {
         //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
         // console.log('watch stock');
-        this.stocks_back = this.stocks
+        this.stocks_back = this.stocks.map(formatDate)
       }
     },
     methods: {

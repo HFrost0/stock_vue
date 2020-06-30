@@ -62,7 +62,7 @@
         })
       }
     },
-    created() {
+    activated() {
       request({
         url: '/get_stock',
         params: {ts_code: this.$route.query.ts_code}

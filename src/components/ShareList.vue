@@ -89,6 +89,9 @@
 </template>
 
 <script>
+
+  import {formatDate} from "../common/utils";
+
   export default {
     name: "ShareList",
     components: {},
@@ -103,7 +106,7 @@
     data() {
       return {
         total_back: this.total,
-        shares_back: this.shares,
+        shares_back: this.shares.map(formatDate),
         currentPage: 1,
         pageSize: 10,
       }
@@ -114,15 +117,15 @@
       },
       shares() {
         //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
-        this.shares_back = this.shares
+        this.shares_back = this.shares.map(formatDate)
       }
     },
     methods: {
       stockDetail(row) {
         this.$router.push({
-          path:'/stock_detail',
-          query:{
-            ts_code:row['ts_code_id']
+          path: '/stock_detail',
+          query: {
+            ts_code: row['ts_code_id']
           }
         })
       },
