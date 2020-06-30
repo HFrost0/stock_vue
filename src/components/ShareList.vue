@@ -48,6 +48,7 @@
               label="每股分红（税前）">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="record_date"
               label="股权登记日">
       </el-table-column>
