@@ -3,6 +3,7 @@
   <div class="share_list">
     <el-table
             @sort-change="sortChange"
+            @filter-change="filterChange"
             :data="shares_back"
             style="width: 100%"
             stripe>
@@ -12,6 +13,10 @@
         <template slot-scope="scope">
           <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
         </template>
+      </el-table-column>
+      <el-table-column
+              prop="name"
+              label="名称">
       </el-table-column>
       <el-table-column
               prop="end_date"
@@ -24,7 +29,10 @@
       </el-table-column>
       <el-table-column
               prop="div_proc"
-              label="实施进度">
+              label="实施进度"
+              :column-key="'div_proc'"
+              :filters="[{ text: '实施', value: '实施' }, { text: '未实施', value: '未实施' }]"
+              >
       </el-table-column>
       <el-table-column
               prop="stk_div"
@@ -121,6 +129,12 @@
       }
     },
     methods: {
+      filterChange(filters){
+        console.log(filters)
+        console.log(filters['div_proc'])
+        this.$emit('sortChange', filters['div_proc'])
+        this.handleCurrentChange(1)
+      },
       stockDetail(row) {
         this.$router.push({
           path: '/stock_detail',
@@ -130,6 +144,7 @@
         })
       },
       handleCurrentChange(currentPage) {
+        console.log('page change')
         this.currentPage = currentPage
         // 请求服务端刷新数据
         const offset = (currentPage - 1) * this.pageSize
@@ -138,8 +153,8 @@
       //bug：在搜索后排序图标仍然保持高亮，但已经恢复默认排序
       sortChange(context) {
         if (context.order === 'ascending' || context.order === 'descending') {
-          this.$emit('sortChange', context)
-          this.currentPage = 1
+          this.$emit('sortChange', context.prop, context.order)
+          this.handleCurrentChange(1)
         }
       }
     }

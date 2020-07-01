@@ -23,56 +23,44 @@
         stock: {},
         total: 0,
         shares: [],
-        context:{
-          prop:'ann_date',
-          order:'descending'
+        context: {
+          ts_code: '',
+          prop: 'ann_date',
+          order: 'descending',
+          offset: 0
         }
       }
     },
     methods: {
       //考虑是否下放到子组件？
-      sortChange(context) {
-        this.context = context
-        request({
-          url: 'get_shares',
-          params: {
-            ts_code: this.$route.query.ts_code,
-            prop: context.prop,
-            order: context.order
-          }
-        }).then(res => {
-          this.total = res.data['total']
-          this.shares = res.data['shares']
-        })
+      sortChange(prop, order) {
+        this.context.prop = prop
+        this.context.order = order
       },
       pageChange(offset, PageSize) {
-        console.log(offset)
+        this.context['offset'] = offset
+        this.context['page_size'] = PageSize
         request({
           url: '/get_shares',
-          params: {
-            ts_code: this.$route.query.ts_code,
-            offset: offset,
-            page_size: PageSize,
-            prop: this.context.prop,
-            order: this.context.order
-          }
-        }).then(res=>{
+          params: this.context
+        }).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']
         })
       }
     },
     activated() {
+      this.context.ts_code = this.$route.query.ts_code
       request({
         url: '/get_stock',
-        params: {ts_code: this.$route.query.ts_code}
+        params: {ts_code: this.context.ts_code}
       }).then(res => {
         this.stock = res.data['stock']
       })
       //并发
       request({
         url: '/get_shares',
-        params: {ts_code: this.$route.query.ts_code}
+        params: this.context
       }).then(res => {
         console.log(res)
         this.total = res.data['total']
