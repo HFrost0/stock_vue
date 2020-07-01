@@ -32,11 +32,11 @@
       }
     },
     methods: {
-      //考虑是否下放到子组件？
       sortChange(prop, order) {
         this.context.prop = prop
         this.context.order = order
       },
+      //仅在pageChange中进行请求
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize

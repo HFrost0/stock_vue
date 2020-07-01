@@ -56,6 +56,14 @@
         }
       },
     },
+    watch:{
+      //加一个这玩意防止爆炸，坑啊，我就没搞懂为啥我按个x你就给我设置成null，可能用原生的办法有可能解决
+      dates(){
+        if(this.dates==null){
+          this.dates = ['','']
+        }
+      }
+    },
     methods: {
       filterChange() {
 
