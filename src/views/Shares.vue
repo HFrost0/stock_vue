@@ -1,7 +1,14 @@
 <template>
   <div>
     <div class="block">
-      <span class="demonstration">预案公告日范围</span>
+      <el-select v-model="time_type" placeholder="请选择日期筛选类型">
+        <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+        </el-option>
+      </el-select>
       <el-date-picker
               unlink-panels
               v-model="dates"
@@ -26,16 +33,27 @@
 <script>
   import ShareList from "../components/ShareList";
   import {request} from "../network/request";
+  import qs from 'qs'
 
   export default {
     name: "Shares",
     components: {ShareList},
-    // 同一context监听 有搞头
     data() {
       return {
         total: 0,
         shares: [],
         dates: ['', ''],
+        options: [
+          {
+            value: 'ann_date',
+            label: '预案公告日'
+          },
+          {
+            value: 'record_date',
+            label: '股权登记日'
+          },
+        ],
+        time_type: ''
       }
     },
     computed: {
@@ -49,24 +67,28 @@
           offset: 0,
           //页长度
           page_size: 10,
+          //时间属性
+          time_type: this.time_type,
           //预案公告日start
           start_date: this.dates[0],
           //预案公告日end
           end_date: this.dates[1],
+          proc_filter: [],
         }
       },
     },
-    watch:{
+    watch: {
       //加一个这玩意防止爆炸，坑啊，我就没搞懂为啥我按个x你就给我设置成null，可能用原生的办法有可能解决
-      dates(){
-        if(this.dates==null){
-          this.dates = ['','']
+      dates() {
+        if (this.dates == null) {
+          this.dates = ['', '']
         }
       }
     },
     methods: {
-      filterChange() {
-
+      filterChange(proc_filter) {
+        console.log(proc_filter)
+        this.context.proc_filter = proc_filter
       },
       dateRange() {
         //向子组件通知改变一次page
@@ -78,7 +100,10 @@
         this.context['page_size'] = PageSize
         request({
           url: '/get_shares',
-          params: this.context
+          params: this.context,
+          paramsSerializer: params => {
+            return qs.stringify(params, {indices: false})
+          }
         }).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']

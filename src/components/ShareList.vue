@@ -19,6 +19,7 @@
               label="名称">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="end_date"
               label="分红年度">
       </el-table-column>
@@ -31,22 +32,30 @@
               prop="div_proc"
               label="实施进度"
               :column-key="'div_proc'"
-              :filters="[{ text: '实施', value: '实施' }, { text: '未实施', value: '未实施' }]"
-              >
+              :filters="[
+                { text: '实施', value: '实施' },
+                { text: '预案', value: '预案' },
+                { text: '股东大会通过', value: '股东大会通过' },
+                { text: '股东提议', value: '股东提议' },]"
+      >
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="stk_div"
               label="每股转送">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="stk_bo_rate"
               label="每股转送比例">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="stk_co_rate"
               label="每股转增比例">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="cash_div"
               label="每股分红（税后）">
       </el-table-column>
@@ -61,26 +70,32 @@
               label="股权登记日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="ex_date"
               label="除权登记日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="pay_date"
               label="派息日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="div_listdate"
               label="红股上市日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="imp_ann_date"
               label="实施公告日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="base_date"
               label="基准日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
               prop="base_share"
               label="基准股本（万">
       </el-table-column>
@@ -129,11 +144,9 @@
       }
     },
     methods: {
-      //todo
-      filterChange(filters){
-        console.log(filters)
-        console.log(filters['div_proc'])
-        this.$emit('sortChange', filters['div_proc'])
+      filterChange(filters) {
+        // console.log(filters['div_proc'])
+        this.$emit('filterChange', filters['div_proc'])
         this.handleCurrentChange(1)
       },
       stockDetail(row) {
