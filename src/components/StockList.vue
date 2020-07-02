@@ -5,6 +5,7 @@
             size="mini"
             placeholder="查询"/>
     <el-table
+            v-loading="loading"
             @sort-change="sortChange"
             :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
             style="width: 100%"
@@ -70,8 +71,10 @@
         search: '',
         currentPage: 1,
         pageSize: 50,
+        loading: true
       }
     },
+
     watch: {
       search(val, oldVal) {
         this.stocks_back = this.stocks.filter(item => {
@@ -89,7 +92,7 @@
     methods: {
       stockDetail(row) {
         this.$router.push({
-          path:'/stock_detail',
+          path:'/stock_daily',
           query:{
             ts_code:row['ts_code']
           }

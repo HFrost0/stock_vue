@@ -1,5 +1,5 @@
 <template>
-  <stock-list :stocks="stocks"/>
+  <stock-list ref="stock_list" :stocks="stocks"/>
 </template>
 
 <script>
@@ -20,8 +20,8 @@
       request({
         url: '/get_stocks'
       }).then(res => {
-        console.log('stock api success')
         this.stocks = res.data['stocks']
+        this.$refs.stock_list.loading = false
       })
     },
   }

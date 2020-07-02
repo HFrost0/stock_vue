@@ -25,6 +25,14 @@ const routes = [
     component: () => import('../views/StockDetail')
   },
   {
+    path: '/stock_daily',
+    name: 'StockDaily',
+    meta: {
+      title: '每日指标'
+    },
+    component: () => import('../views/StockDaily')
+  },
+  {
     path: '/shares',
     name: 'Shares',
     meta: {

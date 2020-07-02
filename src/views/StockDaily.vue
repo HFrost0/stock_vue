@@ -1,43 +1,39 @@
 <template>
   <div>
     <stock-info :stock="stock"></stock-info>
-    <share-list
+    <h1>每日指标</h1>
+    <daily-list
             :total="total"
-            :shares="shares"
-            @filterChange="filterChange"
+            :daily_basics="daily_basics"
             @pageChange="pageChange"
             @sortChange="sortChange"
-    ></share-list>
+    ></daily-list>
   </div>
 </template>
 
 <script>
-  import ShareList from "../components/ShareList";
-  import StockInfo from "../components/StockInfo";
   import {request} from "../network/request";
+  import StockInfo from "../components/StockInfo";
+  import DailyList from "../components/DailyList";
 
   export default {
-    name: "StockDetail",
-    components: {StockInfo, ShareList},
+    name: "StockDaily",
+    components: {DailyList, StockInfo},
     data() {
       return {
         stock: {},
         total: 0,
-        shares: [],
+        daily_basics: [],
         context: {
           ts_code: '',
-          prop: 'ann_date',
+          prop: 'trade_date',
           order: 'descending',
           offset: 0,
           page_size: 10,
-          proc_filter: [],
         }
       }
     },
     methods: {
-      filterChange(proc_filter) {
-        this.context.proc_filter = proc_filter
-      },
       sortChange(prop, order) {
         this.context.prop = prop
         this.context.order = order
@@ -47,11 +43,11 @@
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
         request({
-          url: '/get_shares',
+          url: '/get_daily_basics',
           params: this.context
         }).then(res => {
           this.total = res.data['total']
-          this.shares = res.data['shares']
+          this.daily_basics = res.data['daily_basics']
         })
       }
     },
@@ -65,12 +61,12 @@
       })
       //并发
       request({
-        url: '/get_shares',
+        url: '/get_daily_basics',
         params: this.context
       }).then(res => {
         console.log(res)
         this.total = res.data['total']
-        this.shares = res.data['shares']
+        this.daily_basics = res.data['daily_basics']
       })
     }
   }

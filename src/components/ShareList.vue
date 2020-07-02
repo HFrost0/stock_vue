@@ -97,7 +97,7 @@
       <el-table-column
               sortable="custom"
               prop="base_share"
-              label="基准股本（万">
+              label="基准股本（万）">
       </el-table-column>
     </el-table>
     <el-pagination

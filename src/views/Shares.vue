@@ -18,6 +18,13 @@
               end-placeholder="结束日期">
       </el-date-picker>
       <el-button @click="dateRange">GO</el-button>
+      <br>
+      <el-input
+              @change="textChange"
+              placeholder="输入代码或名称后回车"
+              v-model="search_text"
+              clearable>
+      </el-input>
     </div>
     <share-list
             ref="share_list"
@@ -33,7 +40,6 @@
 <script>
   import ShareList from "../components/ShareList";
   import {request} from "../network/request";
-  import qs from 'qs'
 
   export default {
     name: "Shares",
@@ -53,7 +59,8 @@
             label: '股权登记日'
           },
         ],
-        time_type: ''
+        time_type: '',
+        search_text:''
       }
     },
     computed: {
@@ -74,6 +81,8 @@
           //预案公告日end
           end_date: this.dates[1],
           proc_filter: [],
+          //文本输入内容
+          search_text: this.search_text.trim()
         }
       },
     },
@@ -86,8 +95,10 @@
       }
     },
     methods: {
+      textChange(){
+        this.$refs.share_list.handleCurrentChange(1)
+      },
       filterChange(proc_filter) {
-        console.log(proc_filter)
         this.context.proc_filter = proc_filter
       },
       dateRange() {
@@ -101,9 +112,6 @@
         request({
           url: '/get_shares',
           params: this.context,
-          paramsSerializer: params => {
-            return qs.stringify(params, {indices: false})
-          }
         }).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']
