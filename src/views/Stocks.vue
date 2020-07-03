@@ -6,7 +6,7 @@
   // @ is an alias to /src
 
   import StockList from "../components/StockList";
-  import {request} from "../network/request";
+  import {getStocks} from "../network/stocks";
 
   export default {
     name: 'Stocks',
@@ -17,9 +17,7 @@
       }
     },
     created() {
-      request({
-        url: '/get_stocks'
-      }).then(res => {
+      getStocks().then(res => {
         this.stocks = res.data['stocks']
         this.$refs.stock_list.loading = false
       })

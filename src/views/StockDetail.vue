@@ -14,7 +14,8 @@
 <script>
   import ShareList from "../components/ShareList";
   import StockInfo from "../components/StockInfo";
-  import {request} from "../network/request";
+
+  import {getStock,getShareList} from "../network/stock_detail";
 
   export default {
     name: "StockDetail",
@@ -46,10 +47,7 @@
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
-        request({
-          url: '/get_shares',
-          params: this.context
-        }).then(res => {
+        getShareList(this.context).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']
         })
@@ -57,17 +55,11 @@
     },
     activated() {
       this.context.ts_code = this.$route.query.ts_code
-      request({
-        url: '/get_stock',
-        params: {ts_code: this.context.ts_code}
-      }).then(res => {
+      getStock({ts_code: this.context.ts_code}).then(res => {
         this.stock = res.data['stock']
       })
       //并发
-      request({
-        url: '/get_shares',
-        params: this.context
-      }).then(res => {
+      getShareList(this.context).then(res => {
         console.log(res)
         this.total = res.data['total']
         this.shares = res.data['shares']

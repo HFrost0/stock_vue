@@ -15,6 +15,7 @@
   import {request} from "../network/request";
   import StockInfo from "../components/StockInfo";
   import DailyList from "../components/DailyList";
+  import {getStock, getStockDaily} from "../network/stock_daily";
 
   export default {
     name: "StockDaily",
@@ -42,10 +43,7 @@
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
-        request({
-          url: '/get_daily_basics',
-          params: this.context
-        }).then(res => {
+        getStockDaily(this.context).then(res => {
           this.total = res.data['total']
           this.daily_basics = res.data['daily_basics']
         })
@@ -53,17 +51,11 @@
     },
     activated() {
       this.context.ts_code = this.$route.query.ts_code
-      request({
-        url: '/get_stock',
-        params: {ts_code: this.context.ts_code}
-      }).then(res => {
+      getStock({ts_code: this.context.ts_code}).then(res => {
         this.stock = res.data['stock']
       })
       //并发
-      request({
-        url: '/get_daily_basics',
-        params: this.context
-      }).then(res => {
+      getStockDaily(this.context).then(res => {
         console.log(res)
         this.total = res.data['total']
         this.daily_basics = res.data['daily_basics']

@@ -1,6 +1,12 @@
 <template>
   <div>
     <div class="block">
+      <el-input
+              @change="textChange"
+              placeholder="输入代码或名称后回车"
+              v-model="search_text"
+              clearable>
+      </el-input>
       <el-select v-model="time_type" placeholder="请选择日期筛选类型">
         <el-option
                 v-for="item in options"
@@ -18,13 +24,6 @@
               end-placeholder="结束日期">
       </el-date-picker>
       <el-button @click="dateRange">GO</el-button>
-      <br>
-      <el-input
-              @change="textChange"
-              placeholder="输入代码或名称后回车"
-              v-model="search_text"
-              clearable>
-      </el-input>
     </div>
     <share-list
             ref="share_list"
@@ -39,7 +38,7 @@
 
 <script>
   import ShareList from "../components/ShareList";
-  import {request} from "../network/request";
+  import {getShareList} from "../network/shares";
 
   export default {
     name: "Shares",
@@ -60,7 +59,7 @@
           },
         ],
         time_type: '',
-        search_text:''
+        search_text: ''
       }
     },
     computed: {
@@ -95,7 +94,7 @@
       }
     },
     methods: {
-      textChange(){
+      textChange() {
         this.$refs.share_list.handleCurrentChange(1)
       },
       filterChange(proc_filter) {
@@ -109,10 +108,7 @@
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
-        request({
-          url: '/get_shares',
-          params: this.context,
-        }).then(res => {
+        getShareList(this.context).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']
         })
@@ -124,9 +120,7 @@
       }
     },
     created() {
-      request({
-        url: '/get_shares',
-      }).then(res => {
+      getShareList().then(res => {
         this.total = res.data['total']
         this.shares = res.data['shares']
       })
@@ -135,5 +129,8 @@
 </script>
 
 <style scoped>
+  .el-input {
+    width: 300px;
+  }
 
 </style>
