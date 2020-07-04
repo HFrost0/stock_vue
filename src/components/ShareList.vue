@@ -126,21 +126,18 @@
         type: Array,
       }
     },
-    data() {
-      return {
-        total_back: this.total,
-        shares_back: this.shares.map(formatDate),
-        currentPage: 1,
-        pageSize: 10,
+    computed: {
+      shares_back() {
+        return this.shares.map(formatDate)
+      },
+      total_back() {
+        return this.total
       }
     },
-    watch: {
-      total() {
-        this.total_back = this.total
-      },
-      shares() {
-        //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
-        this.shares_back = this.shares.map(formatDate)
+    data() {
+      return {
+        currentPage: 1,
+        pageSize: 10,
       }
     },
     methods: {

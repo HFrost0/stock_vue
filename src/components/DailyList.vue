@@ -106,19 +106,16 @@
     },
     data() {
       return {
-        total_back: this.total,
-        daily_basics_back: this.daily_basics.map(formatDate),
         currentPage: 1,
         pageSize: 10,
       }
     },
-    watch: {
-      total() {
-        this.total_back = this.total
+    computed:{
+      total_back(){
+        return this.total
       },
-      daily_basics() {
-        //必须监听父组件的变化，可能此变量只在初始化的时候获得一次赋值
-        this.daily_basics_back = this.daily_basics.map(formatDate)
+      daily_basics_back(){
+        return this.daily_basics.map(formatDate)
       }
     },
     methods: {

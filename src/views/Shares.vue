@@ -75,23 +75,16 @@
           page_size: 10,
           //时间属性
           time_type: this.time_type,
-          //预案公告日start
-          start_date: this.dates[0],
-          //预案公告日end
-          end_date: this.dates[1],
+          //时间开始点 先判断是否为null（在用户点击x后会变成null，不处理将报错）
+          start_date: this.dates!==null?this.dates[0]:'',
+          //时间结束点
+          end_date: this.dates!==null?this.dates[1]:'',
+          //实施进度过滤器
           proc_filter: [],
-          //文本输入内容
+          //文本输入内容 去除用户输入的前后空格
           search_text: this.search_text.trim()
         }
       },
-    },
-    watch: {
-      //加一个这玩意防止爆炸，坑啊，我就没搞懂为啥我按个x你就给我设置成null，可能用原生的办法有可能解决
-      dates() {
-        if (this.dates == null) {
-          this.dates = ['', '']
-        }
-      }
     },
     methods: {
       textChange() {
