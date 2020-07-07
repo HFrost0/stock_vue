@@ -36,7 +36,9 @@
                 { text: '实施', value: '实施' },
                 { text: '预案', value: '预案' },
                 { text: '股东大会通过', value: '股东大会通过' },
-                { text: '股东提议', value: '股东提议' },]"
+                { text: '股东提议', value: '股东提议' },
+                { text: '未通过', value: '未通过' },
+                ]"
       >
       </el-table-column>
       <el-table-column
