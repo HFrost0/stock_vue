@@ -44,7 +44,7 @@
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page="currentPage"
-            :page-sizes="[50, 100, 200, 400]"
+            :page-sizes="[20, 100, 200, 400]"
             :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="stocks_back.length">
@@ -70,7 +70,7 @@
         stocks_back: this.stocks.map(formatDate),
         search: '',
         currentPage: 1,
-        pageSize: 50,
+        pageSize: 20,
         loading: true
       }
     },

@@ -29,6 +29,11 @@
               label="预案公告日">
       </el-table-column>
       <el-table-column
+              sortable="custom"
+              prop="imp_ann_date"
+              label="实施公告日">
+      </el-table-column>
+      <el-table-column
               prop="div_proc"
               label="实施进度"
               :column-key="'div_proc'"
@@ -85,11 +90,6 @@
               sortable="custom"
               prop="div_listdate"
               label="红股上市日">
-      </el-table-column>
-      <el-table-column
-              sortable="custom"
-              prop="imp_ann_date"
-              label="实施公告日">
       </el-table-column>
       <el-table-column
               sortable="custom"

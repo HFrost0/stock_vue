@@ -50,6 +50,10 @@
         dates: ['', ''],
         options: [
           {
+            value: 'imp_ann_date',
+            label: '实施公告日'
+          },
+          {
             value: 'ann_date',
             label: '预案公告日'
           },
@@ -66,7 +70,7 @@
       context() {
         return {
           //排序的属性
-          prop: 'ann_date',
+          prop: 'imp_ann_date',
           //排序的顺序
           order: 'descending',
           //分页偏移
@@ -113,7 +117,7 @@
       }
     },
     created() {
-      getShareList().then(res => {
+      getShareList(this.context).then(res => {
         this.total = res.data['total']
         this.shares = res.data['shares']
       })

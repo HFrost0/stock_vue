@@ -27,7 +27,7 @@
         shares: [],
         context: {
           ts_code: '',
-          prop: 'ann_date',
+          prop: 'imp_ann_date',
           order: 'descending',
           offset: 0,
           page_size: 10,
