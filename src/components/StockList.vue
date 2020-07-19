@@ -1,5 +1,5 @@
 <template>
-  <div class="stock_list">
+  <div>
     <el-input
             v-model="search"
             size="mini"

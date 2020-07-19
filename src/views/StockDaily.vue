@@ -3,6 +3,7 @@
     <stock-info :stock="stock"></stock-info>
     <h1>每日指标</h1>
     <daily-list
+            ref="daily_list"
             :total="total"
             :daily_basics="daily_basics"
             @pageChange="pageChange"
@@ -12,7 +13,6 @@
 </template>
 
 <script>
-  import {request} from "../network/request";
   import StockInfo from "../components/StockInfo";
   import DailyList from "../components/DailyList";
   import {getStock, getStockDaily} from "../network/stock_daily";
@@ -43,9 +43,11 @@
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
+        this.$refs.daily_list.loading = true
         getStockDaily(this.context).then(res => {
           this.total = res.data['total']
           this.daily_basics = res.data['daily_basics']
+          this.$refs.daily_list.loading = false
         })
       }
     },
@@ -56,9 +58,9 @@
       })
       //并发
       getStockDaily(this.context).then(res => {
-        console.log(res)
         this.total = res.data['total']
         this.daily_basics = res.data['daily_basics']
+        this.$refs.daily_list.loading = false
       })
     }
   }

@@ -1,6 +1,7 @@
 <template>
-  <div class="daily_list">
+  <div>
     <el-table
+            v-loading="loading"
             @sort-change="sortChange"
             :data="daily_basics_back"
             style="width: 100%"
@@ -106,6 +107,7 @@
     },
     data() {
       return {
+        loading: true,
         currentPage: 1,
         pageSize: 10,
       }

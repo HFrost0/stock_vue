@@ -105,9 +105,11 @@
       pageChange(offset, PageSize) {
         this.context['offset'] = offset
         this.context['page_size'] = PageSize
+        this.$refs.share_list.loading = true
         getShareList(this.context).then(res => {
           this.total = res.data['total']
           this.shares = res.data['shares']
+          this.$refs.share_list.loading = false
         })
       },
       sortChange(prop, order) {
@@ -120,6 +122,7 @@
       getShareList(this.context).then(res => {
         this.total = res.data['total']
         this.shares = res.data['shares']
+        this.$refs.share_list.loading = false
       })
     }
   }

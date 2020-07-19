@@ -1,7 +1,8 @@
 <!--针对share的全部进行后端分页-->
 <template>
-  <div class="share_list">
+  <div>
     <el-table
+            v-loading="loading"
             @sort-change="sortChange"
             @filter-change="filterChange"
             :data="shares_back"
@@ -138,6 +139,7 @@
     },
     data() {
       return {
+        loading: true,
         currentPage: 1,
         pageSize: 10,
       }
