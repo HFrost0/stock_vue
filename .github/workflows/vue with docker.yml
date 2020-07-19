@@ -1,8 +1,8 @@
 name: Vue Test
 on: [push]
 jobs: 
-  Build dist: 
-    name: Build vue dist
+  build_dist:
+    name: build_dist
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
