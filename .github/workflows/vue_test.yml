@@ -1,0 +1,15 @@
+name: Vue Test
+on: [push]
+jobs: 
+  build_dist: 
+    name: build_dist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run build
+      - run: ls
