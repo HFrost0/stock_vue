@@ -1,0 +1,23 @@
+name: Vue Test
+on: [push]
+jobs: 
+  Build dist: 
+    name: Build vue dist
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run build
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue
+          tags: 1.1
+
