@@ -2,6 +2,7 @@
   <div>
     <stock-info :stock="stock"></stock-info>
     <share-list
+            ref="share_list"
             :total="total"
             :shares="shares"
             @filterChange="filterChange"
