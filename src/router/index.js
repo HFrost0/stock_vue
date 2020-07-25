@@ -17,14 +17,6 @@ const routes = [
     component: () => import('../views/Stocks')
   },
   {
-    path: '/query',
-    name: 'Query',
-    meta: {
-      title: '查询'
-    },
-    component: () => import('../views/Query')
-  },
-  {
     path: '/stock_detail',
     name: 'StockDetail',
     meta: {
