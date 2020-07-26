@@ -32,6 +32,8 @@
 </template>
 
 <script>
+  import {con_dict, val_dict} from "../common/static";
+
   export default {
     name: "QueryItem",
     props: {
@@ -44,16 +46,8 @@
     },
     data() {
       return {
-        val_dict: {
-          'close': '股价',
-          'dv_ratio': '股息率（%）',
-          'pe': '市盈率',
-          'pe_ttm': '市盈率（TTM）'
-        },
-        con_dict: {
-          'current': '当前',
-          'continues': '连续'
-        }
+        val_dict,
+        con_dict,
       }
     },
   }

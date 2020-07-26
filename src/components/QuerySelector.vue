@@ -8,10 +8,10 @@
           clearable
           placeholder="请选择条件">
           <el-option
-            v-for="item in options"
-            :key="item.key"
-            :label="item.label"
-            :value="item.value">
+            v-for="(key, value) in val_dict"
+            :key="key"
+            :label="key"
+            :value="value">
           </el-option>
         </el-select>
       </span>
@@ -22,10 +22,10 @@
           clearable
           placeholder="请选择类型">
           <el-option
-            v-for="item in available_cons"
-            :key="item.key"
-            :label="item.label"
-            :value="item.value"
+            v-for="(key, value) in available_cons"
+            :key="key"
+            :label="key"
+            :value="value"
           ></el-option>
         </el-select>
       </span>
@@ -50,44 +50,22 @@
 </template>
 
 <script>
+  import {val_dict} from "../common/static";
+
   export default {
     name: "QuerySelector",
     computed: {
       available_cons() {
-        let cons = [
-          {
-            value: 'current',
-            label: '当前'
-          }
-        ]
+        let cons = {'current': '当前'}
         if (this.query.val === 'dv_ratio') {
-          cons.push({
-            value: 'continues',
-            label: '累计'
-          })
+          cons['continues'] = '累计'
         }
         return cons
       }
     },
     data() {
       return {
-        options: [
-          {
-            value: 'close',
-            label: '股价'
-          },
-          {
-            value: 'dv_ratio',
-            label: '股息率（%）'
-          },
-          {
-            value: 'pe',
-            label: '市盈率'
-          },
-          {
-            value: 'pe_ttm',
-            label: '市盈率（TTM）'
-          }],
+        val_dict,
         query: {
           val: '',
           con: '',
