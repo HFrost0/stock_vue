@@ -4,7 +4,7 @@
     <query-selector
             @addQuery="addQuery"
     ></query-selector>
-    <el-divider content-position="left">当前条件</el-divider>
+    <el-divider content-position="left"><i class="el-icon-search"></i>当前条件</el-divider>
 
     <div class="item-container">
       <query-item
@@ -17,7 +17,7 @@
         <el-button @click="submitQuery">筛选</el-button>
         <el-button @click="queries=[]">重置</el-button>
       </span>
-      <span v-else class="without">当前没有条件</span>
+      <div v-else class="without"><p>当前没有条件</p></div>
     </div>
 
     <stock-list
@@ -76,12 +76,20 @@
     width: 300px;
   }
   .item-container{
-    min-height: 150px;
+    min-height: 100px;
   }
   .button{
     margin-top: 15px;
     margin-bottom: 15px;
     float: right;
+  }
+  .without{
+    width: 100px;
+    margin:0 auto;
+    color: #909399;
+  }
+  [class^="el-icon"]{
+    margin-right: 10px;
   }
 
 </style>

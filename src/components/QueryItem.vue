@@ -1,11 +1,31 @@
 <template>
   <div>
     <el-card>
-      <span>
-        {{query_text}}
+      <i class="el-icon-paperclip"></i>
+      <span class="val">
+        {{val_dict[query.val]}}
       </span>
+      <span class="con">
+        {{con_dict[query.con]}}
+        <span v-if="query.con === 'continues'">
+          {{query.years}}年
+        </span>
+      </span>
+      <span>
+        大于
+      </span>
+      <span class="number">
+        {{query.min}}
+      </span>
+      <span>
+       小于
+      </span>
+      <span class="number">
+        {{query.max}}
+      </span>
+
       <span class="button">
-        <el-button slot="reference" @click="dropItem">删除</el-button>
+        <el-button type="danger" plain size="small" @click="dropItem">删除</el-button>
       </span>
     </el-card>
   </div>
@@ -36,19 +56,23 @@
         }
       }
     },
-    computed: {
-      query_text() {
-        let text = this.val_dict[this.query.val] + this.con_dict[this.query.con]
-        text += this.query.con === 'continues' ? this.query.years + '年' : ''
-        text += '大于' + this.query.min + '小于' + this.query.max
-        return text
-      }
-    }
   }
 </script>
 
 <style scoped>
   .button {
     float: right;
+  }
+  .val,.number{
+    color: #409EFF;
+  }
+  .con{
+    color: #E6A23C;
+  }
+  .el-icon-paperclip{
+    font-size: 20px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 </style>

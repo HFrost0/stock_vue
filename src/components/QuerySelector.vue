@@ -93,7 +93,7 @@
           con: '',
           years: 0,
           min: 0,
-          max: 0,
+          max: 10,
         },
       }
     },
@@ -107,7 +107,7 @@
           con: '',
           years: 0,
           min: 0,
-          max: 0,
+          max: 10,
         }
       }
     }
