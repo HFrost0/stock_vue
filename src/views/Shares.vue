@@ -2,36 +2,36 @@
   <div>
     <div class="block">
       <el-input
-              @change="textChange"
-              placeholder="输入代码或名称后回车"
-              v-model="search_text"
-              clearable>
+        @change="textChange"
+        placeholder="输入代码或名称后回车"
+        v-model="search_text"
+        clearable>
       </el-input>
       <el-select v-model="time_type" placeholder="请选择日期筛选类型">
         <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
         </el-option>
       </el-select>
       <el-date-picker
-              unlink-panels
-              v-model="dates"
-              type="daterange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期">
+        unlink-panels
+        v-model="dates"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期">
       </el-date-picker>
       <el-button @click="dateRange">GO</el-button>
     </div>
     <share-list
-            ref="share_list"
-            :total="total"
-            :shares="shares"
-            @pageChange="pageChange"
-            @sortChange="sortChange"
-            @filterChange="filterChange"
+      ref="share_list"
+      :total="total"
+      :shares="shares"
+      @pageChange="pageChange"
+      @sortChange="sortChange"
+      @filterChange="filterChange"
     ></share-list>
   </div>
 </template>
@@ -80,9 +80,9 @@
           //时间属性
           time_type: this.time_type,
           //时间开始点 先判断是否为null（在用户点击x后会变成null，不处理将报错）
-          start_date: this.dates!==null?this.dates[0]:'',
+          start_date: this.dates !== null ? this.dates[0] : '',
           //时间结束点
-          end_date: this.dates!==null?this.dates[1]:'',
+          end_date: this.dates !== null ? this.dates[1] : '',
           //实施进度过滤器
           proc_filter: [],
           //文本输入内容 去除用户输入的前后空格

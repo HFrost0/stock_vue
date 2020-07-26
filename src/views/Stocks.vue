@@ -2,15 +2,15 @@
   <div>
     <el-divider content-position="left"><i class="el-icon-edit"></i>添加一个条件</el-divider>
     <query-selector
-            @addQuery="addQuery"
+      @addQuery="addQuery"
     ></query-selector>
     <el-divider content-position="left"><i class="el-icon-search"></i>当前条件</el-divider>
 
     <div class="item-container">
       <query-item
-              v-for="(query,index) in queries"
-              :query="query"
-              @dropItem="dropItem(index)"
+        v-for="(query,index) in queries"
+        :query="query"
+        @dropItem="dropItem(index)"
       ></query-item>
       <!--当query为空时不显示按钮-->
       <span v-if="queries.length>0" class="button">
@@ -21,8 +21,8 @@
     </div>
 
     <stock-list
-            ref="stock_list"
-            :stocks="stocks"
+      ref="stock_list"
+      :stocks="stocks"
     ></stock-list>
 
 
@@ -45,24 +45,24 @@
       }
     },
     methods: {
-      dropItem(index){
-        this.queries.splice(index,1)
+      dropItem(index) {
+        this.queries.splice(index, 1)
       },
-      addQuery(query){
+      addQuery(query) {
         this.queries.push(query)
       },
       // 提交Query重新请求
-      submitQuery(){
+      submitQuery() {
         this.stocks = []
         this.$refs.stock_list.loading = true
-        getStocks({queries: this.queries}).then(res=>{
+        getStocks({queries: this.queries}).then(res => {
           this.stocks = res.data['stocks']
           this.$refs.stock_list.loading = false
         })
       }
     },
     created() {
-      getStocks({queries:this.queries}).then(res => {
+      getStocks({queries: this.queries}).then(res => {
         this.stocks = res.data['stocks']
         this.$refs.stock_list.loading = false
       })
@@ -75,20 +75,24 @@
   .el-input {
     width: 300px;
   }
-  .item-container{
+
+  .item-container {
     min-height: 100px;
   }
-  .button{
+
+  .button {
     margin-top: 15px;
     margin-bottom: 15px;
     float: right;
   }
-  .without{
+
+  .without {
     width: 100px;
-    margin:0 auto;
+    margin: 0 auto;
     color: #909399;
   }
-  [class^="el-icon"]{
+
+  [class^="el-icon"] {
     margin-right: 10px;
   }
 

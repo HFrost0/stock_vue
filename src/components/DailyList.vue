@@ -1,90 +1,90 @@
 <template>
   <div>
     <el-table
-            v-loading="loading"
-            @sort-change="sortChange"
-            :data="daily_basics_back"
-            style="width: 100%"
-            stripe>
+      v-loading="loading"
+      @sort-change="sortChange"
+      :data="daily_basics_back"
+      style="width: 100%"
+      stripe>
       <el-table-column
-              prop="ts_code_id"
-              label="股票代码">
+        prop="ts_code_id"
+        label="股票代码">
       </el-table-column>
       <el-table-column
-              prop="trade_date"
-              label="交易日期">
+        prop="trade_date"
+        label="交易日期">
       </el-table-column>
       <el-table-column
-              prop="close"
-              label="收盘价">
+        prop="close"
+        label="收盘价">
       </el-table-column>
       <el-table-column
-              prop="turnover_rate"
-              label="换手率(%)">
+        prop="turnover_rate"
+        label="换手率(%)">
       </el-table-column>
       <el-table-column
-              prop="turnover_rate_f"
-              label="换手率(自由流通股)">
+        prop="turnover_rate_f"
+        label="换手率(自由流通股)">
       </el-table-column>
       <el-table-column
-              prop="volume_ratio"
-              label="量比">
+        prop="volume_ratio"
+        label="量比">
       </el-table-column>
       <el-table-column
-              prop="pe"
-              label="市盈率">
+        prop="pe"
+        label="市盈率">
       </el-table-column>
       <el-table-column
-              prop="pe_ttm"
-              label="市盈率(TTM)">
+        prop="pe_ttm"
+        label="市盈率(TTM)">
       </el-table-column>
       <el-table-column
-              prop="pb"
-              label="市净率">
+        prop="pb"
+        label="市净率">
       </el-table-column>
       <el-table-column
-              prop="ps"
-              label="市销率">
+        prop="ps"
+        label="市销率">
       </el-table-column>
       <el-table-column
-              prop="ps_ttm"
-              label="市销率(TTM)">
+        prop="ps_ttm"
+        label="市销率(TTM)">
       </el-table-column>
       <el-table-column
-              prop="dv_ratio"
-              label="股息率(%)">
+        prop="dv_ratio"
+        label="股息率(%)">
       </el-table-column>
       <el-table-column
-              prop="dv_ttm"
-              label="股息率(TTM)">
+        prop="dv_ttm"
+        label="股息率(TTM)">
       </el-table-column>
       <el-table-column
-              prop="total_share"
-              label="总股本(万股)">
+        prop="total_share"
+        label="总股本(万股)">
       </el-table-column>
       <el-table-column
-              prop="float_share"
-              label="流通股本(万股)">
+        prop="float_share"
+        label="流通股本(万股)">
       </el-table-column>
       <el-table-column
-              prop="free_share"
-              label="自由流通股本(万股)">
+        prop="free_share"
+        label="自由流通股本(万股)">
       </el-table-column>
       <el-table-column
-              prop="total_mv"
-              label="总市值(万元)">
+        prop="total_mv"
+        label="总市值(万元)">
       </el-table-column>
       <el-table-column
-              prop="circ_mv"
-              label="流通市值(万元)">
+        prop="circ_mv"
+        label="流通市值(万元)">
       </el-table-column>
     </el-table>
     <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-size="pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="total_back">
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pageSize"
+      layout="total, prev, pager, next, jumper"
+      :total="total_back">
       >
     </el-pagination>
   </div>
@@ -112,11 +112,11 @@
         pageSize: 10,
       }
     },
-    computed:{
-      total_back(){
+    computed: {
+      total_back() {
         return this.total
       },
-      daily_basics_back(){
+      daily_basics_back() {
         return this.daily_basics.map(formatDate)
       }
     },

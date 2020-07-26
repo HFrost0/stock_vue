@@ -63,13 +63,16 @@
   .button {
     float: right;
   }
-  .val,.number{
+
+  .val, .number {
     color: #409EFF;
   }
-  .con{
+
+  .con {
     color: #E6A23C;
   }
-  .el-icon-paperclip{
+
+  .el-icon-paperclip {
     font-size: 20px;
     margin-right: 10px;
     margin-top: 5px;

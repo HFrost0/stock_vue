@@ -1,53 +1,53 @@
 <template>
   <div>
     <el-input
-            v-model="search"
-            size="mini"
-            placeholder="查询"/>
+      v-model="search"
+      size="mini"
+      placeholder="查询"/>
     <el-table
-            v-loading="loading"
-            @sort-change="sortChange"
-            :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-            style="width: 100%"
-            stripe>
+      v-loading="loading"
+      @sort-change="sortChange"
+      :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+      style="width: 100%"
+      stripe>
       <el-table-column
-              prop="ts_code"
-              label="股票代码">
+        prop="ts_code"
+        label="股票代码">
         <template slot-scope="scope">
           <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}</el-link>
         </template>
       </el-table-column>
       <el-table-column
-              prop="name"
-              label="名称">
+        prop="name"
+        label="名称">
       </el-table-column>
       <el-table-column
-              prop="area"
-              label="地区">
+        prop="area"
+        label="地区">
       </el-table-column>
       <el-table-column
-              prop="industry"
-              label="行业">
+        prop="industry"
+        label="行业">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="list_date"
-              label="上市日期">
+        sortable="custom"
+        prop="list_date"
+        label="上市日期">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="share_times"
-              label="分红次数">
+        sortable="custom"
+        prop="share_times"
+        label="分红次数">
       </el-table-column>
     </el-table>
     <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-sizes="[20, 100, 200, 400]"
-            :page-size="pageSize"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="stocks_back.length">
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[20, 100, 200, 400]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="stocks_back.length">
       >
     </el-pagination>
   </div>
@@ -92,9 +92,9 @@
     methods: {
       stockDetail(row) {
         this.$router.push({
-          path:'/stock_daily',
-          query:{
-            ts_code:row['ts_code']
+          path: '/stock_daily',
+          query: {
+            ts_code: row['ts_code']
           }
         })
       },

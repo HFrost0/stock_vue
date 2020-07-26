@@ -2,43 +2,43 @@
 <template>
   <div>
     <el-table
-            v-loading="loading"
-            @sort-change="sortChange"
-            @filter-change="filterChange"
-            :data="shares_back"
-            style="width: 100%"
-            stripe>
+      v-loading="loading"
+      @sort-change="sortChange"
+      @filter-change="filterChange"
+      :data="shares_back"
+      style="width: 100%"
+      stripe>
       <el-table-column
-              prop="ts_code_id"
-              label="股票代码">
+        prop="ts_code_id"
+        label="股票代码">
         <template slot-scope="scope">
           <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
         </template>
       </el-table-column>
       <el-table-column
-              prop="name"
-              label="名称">
+        prop="name"
+        label="名称">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="end_date"
-              label="分红年度">
+        sortable="custom"
+        prop="end_date"
+        label="分红年度">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="ann_date"
-              label="预案公告日">
+        sortable="custom"
+        prop="ann_date"
+        label="预案公告日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="imp_ann_date"
-              label="实施公告日">
+        sortable="custom"
+        prop="imp_ann_date"
+        label="实施公告日">
       </el-table-column>
       <el-table-column
-              prop="div_proc"
-              label="实施进度"
-              :column-key="'div_proc'"
-              :filters="[
+        prop="div_proc"
+        label="实施进度"
+        :column-key="'div_proc'"
+        :filters="[
                 { text: '实施', value: '实施' },
                 { text: '预案', value: '预案' },
                 { text: '股东大会通过', value: '股东大会通过' },
@@ -48,67 +48,67 @@
       >
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="stk_div"
-              label="每股转送">
+        sortable="custom"
+        prop="stk_div"
+        label="每股转送">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="stk_bo_rate"
-              label="每股转送比例">
+        sortable="custom"
+        prop="stk_bo_rate"
+        label="每股转送比例">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="stk_co_rate"
-              label="每股转增比例">
+        sortable="custom"
+        prop="stk_co_rate"
+        label="每股转增比例">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="cash_div"
-              label="每股分红（税后）">
+        sortable="custom"
+        prop="cash_div"
+        label="每股分红（税后）">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="cash_div_tax"
-              label="每股分红（税前）">
+        sortable="custom"
+        prop="cash_div_tax"
+        label="每股分红（税前）">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="record_date"
-              label="股权登记日">
+        sortable="custom"
+        prop="record_date"
+        label="股权登记日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="ex_date"
-              label="除权登记日">
+        sortable="custom"
+        prop="ex_date"
+        label="除权登记日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="pay_date"
-              label="派息日">
+        sortable="custom"
+        prop="pay_date"
+        label="派息日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="div_listdate"
-              label="红股上市日">
+        sortable="custom"
+        prop="div_listdate"
+        label="红股上市日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="base_date"
-              label="基准日">
+        sortable="custom"
+        prop="base_date"
+        label="基准日">
       </el-table-column>
       <el-table-column
-              sortable="custom"
-              prop="base_share"
-              label="基准股本（万）">
+        sortable="custom"
+        prop="base_share"
+        label="基准股本（万）">
       </el-table-column>
     </el-table>
     <el-pagination
-            @current-change="handleCurrentChange"
-            :current-page="currentPage"
-            :page-size="pageSize"
-            layout="total, prev, pager, next, jumper"
-            :total="total_back">
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-size="pageSize"
+      layout="total, prev, pager, next, jumper"
+      :total="total_back">
       >
     </el-pagination>
   </div>

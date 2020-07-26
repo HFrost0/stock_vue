@@ -3,11 +3,11 @@
     <stock-info :stock="stock"></stock-info>
     <h1>每日指标</h1>
     <daily-list
-            ref="daily_list"
-            :total="total"
-            :daily_basics="daily_basics"
-            @pageChange="pageChange"
-            @sortChange="sortChange"
+      ref="daily_list"
+      :total="total"
+      :daily_basics="daily_basics"
+      @pageChange="pageChange"
+      @sortChange="sortChange"
     ></daily-list>
   </div>
 </template>

@@ -3,29 +3,29 @@
     <el-card class="card">
       <span>
         <el-select
-                v-model="query.val"
-                @change="query.con=''"
-                clearable
-                placeholder="请选择条件">
+          v-model="query.val"
+          @change="query.con=''"
+          clearable
+          placeholder="请选择条件">
           <el-option
-                  v-for="item in options"
-                  :key="item.key"
-                  :label="item.label"
-                  :value="item.value">
+            v-for="item in options"
+            :key="item.key"
+            :label="item.label"
+            :value="item.value">
           </el-option>
         </el-select>
       </span>
 
       <span v-if="query.val!==''">
         <el-select
-                v-model="query.con"
-                clearable
-                placeholder="请选择类型">
+          v-model="query.con"
+          clearable
+          placeholder="请选择类型">
           <el-option
-                  v-for="item in available_cons"
-                  :key="item.key"
-                  :label="item.label"
-                  :value="item.value"
+            v-for="item in available_cons"
+            :key="item.key"
+            :label="item.label"
+            :value="item.value"
           ></el-option>
         </el-select>
       </span>
@@ -115,7 +115,7 @@
 </script>
 
 <style scoped>
-  .button{
+  .button {
     float: right;
   }
 </style>

@@ -2,12 +2,12 @@
   <div>
     <stock-info :stock="stock"></stock-info>
     <share-list
-            ref="share_list"
-            :total="total"
-            :shares="shares"
-            @filterChange="filterChange"
-            @pageChange="pageChange"
-            @sortChange="sortChange"
+      ref="share_list"
+      :total="total"
+      :shares="shares"
+      @filterChange="filterChange"
+      @pageChange="pageChange"
+      @sortChange="sortChange"
     ></share-list>
   </div>
 </template>
@@ -16,7 +16,7 @@
   import ShareList from "../components/ShareList";
   import StockInfo from "../components/StockInfo";
 
-  import {getStock,getShareList} from "../network/stock_detail";
+  import {getStock, getShareList} from "../network/stock_detail";
 
   export default {
     name: "StockDetail",
