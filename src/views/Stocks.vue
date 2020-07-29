@@ -25,7 +25,6 @@
       :stocks="stocks"
     ></stock-list>
 
-
   </div>
 </template>
 
@@ -58,6 +57,8 @@
         getStocks({queries: this.queries}).then(res => {
           this.stocks = res.data['stocks']
           this.$refs.stock_list.loading = false
+          // 当条件变更后重置子组件的页码
+          this.$refs.stock_list.currentPage = 1
         })
       }
     },
