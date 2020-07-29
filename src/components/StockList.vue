@@ -39,6 +39,11 @@
         prop="share_times"
         label="分红次数">
       </el-table-column>
+      <el-table-column
+        sortable="custom"
+        prop="close"
+        label="当前股价">
+      </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
