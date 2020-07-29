@@ -1,9 +1,9 @@
 import {request} from "./request";
 
-export function getStocks(params) {
+export function getStocks(data) {
   return request({
     url:'/get_stocks',
     method: 'POST',
-    data: params,
+    data: data,
   })
 }

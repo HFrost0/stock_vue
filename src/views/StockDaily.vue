@@ -51,7 +51,7 @@
         })
       }
     },
-    activated() {
+    created() {
       this.context.ts_code = this.$route.query.ts_code
       getStock({ts_code: this.context.ts_code}).then(res => {
         this.stock = res.data['stock']
