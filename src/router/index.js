@@ -18,19 +18,11 @@ const routes = [
   },
   {
     path: '/stock_detail',
-    name: 'StockDetail',
+    name: 'StockMerge',
     meta: {
       title: '股票详情'
     },
-    component: () => import('../views/StockDetail')
-  },
-  {
-    path: '/stock_daily',
-    name: 'StockDaily',
-    meta: {
-      title: '每日指标'
-    },
-    component: () => import('../views/StockDaily')
+    component: () => import('../views/StockMerge')
   },
   {
     path: '/shares',

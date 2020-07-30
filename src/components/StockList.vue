@@ -97,7 +97,7 @@
     methods: {
       stockDetail(row) {
         this.$router.push({
-          path: '/stock_daily',
+          path: '/stock_detail',
           query: {
             ts_code: row['ts_code']
           }

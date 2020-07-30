@@ -1,9 +1,13 @@
 <template>
   <!--  希望是一个信息卡片的形式，之后再说-->
-  <div>
-    <h1>{{stock['ts_code']}}</h1>
-    <h2>{{stock['name']}}</h2>
+  <div class="info_style">
+    {{stock['ts_code']}}
+    &#12288;
+    {{stock['name']}}
     <!--<p>{{stock['industry']}}</p>-->
+<!--    {{stock['name']}}-->
+<!--    &#12288;-->
+<!--    &#40;{{stock['ts_code']}}&#41;-->
   </div>
 </template>
 
@@ -20,5 +24,10 @@
 </script>
 
 <style scoped>
+  .info_style{
+    font-size: 30px;
+    margin-top: 5%;
+    /*font-family: Helvetica;*/
+  }
 
 </style>
