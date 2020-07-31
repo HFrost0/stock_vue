@@ -98,7 +98,8 @@
         this.$router.push({
           path: '/stock_detail',
           query: {
-            ts_code: row['ts_code']
+            ts_code: row['ts_code'],
+            myTab: "first"
           }
         })
       },

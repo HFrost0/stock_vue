@@ -12,7 +12,8 @@
         prop="ts_code_id"
         label="股票代码">
         <template slot-scope="scope">
-          <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
+          <el-link v-if="!state" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
+          <v-text v-if="state" >{{scope.row['ts_code_id']}}</v-text>
         </template>
       </el-table-column>
       <el-table-column
@@ -127,6 +128,9 @@
       },
       shares: {
         type: Array,
+      },
+      state: {
+        type: Array
       }
     },
     computed: {
@@ -154,7 +158,8 @@
         this.$router.push({
           path: '/stock_detail',
           query: {
-            ts_code: row['ts_code_id']
+            ts_code: row['ts_code_id'],
+            myTab: "second"
           }
         })
       },

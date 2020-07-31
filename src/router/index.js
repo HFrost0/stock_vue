@@ -12,7 +12,7 @@ const routes = [
     path: '/stocks',
     name: 'Stocks',
     meta: {
-      title: '股票列表'
+      title: '股票列表',
     },
     component: () => import('../views/Stocks')
   },
@@ -20,7 +20,8 @@ const routes = [
     path: '/stock_detail',
     name: 'StockMerge',
     meta: {
-      title: '股票详情'
+      navShow: true,
+      title: '股票详情',
     },
     component: () => import('../views/StockMerge')
   },
@@ -28,7 +29,7 @@ const routes = [
     path: '/shares',
     name: 'Shares',
     meta: {
-      title: '分红'
+      title: '分红',
     },
     component: () => import('../views/Shares')
   },
