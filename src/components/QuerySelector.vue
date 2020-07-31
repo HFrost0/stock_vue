@@ -72,6 +72,7 @@
     watch:{
       'query.con'(){
         if (this.query.con === 'level'){
+          this.query.mouths = 1
           this.query.min = 0.01
           this.query.max = 0.5
         }
