@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="/stocks">股票</el-menu-item>
-      <el-menu-item index="/shares">分红</el-menu-item>
+    <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu-item v-if="!$route.meta.navShow" index="/stocks">股票</el-menu-item>
+      <el-menu-item v-if="!$route.meta.navShow" index="/shares">分红</el-menu-item>
     </el-menu>
     <keep-alive include="Stocks">
       <router-view></router-view>
@@ -17,7 +17,7 @@
     components: {},
     data() {
       return {
-        activeIndex: '/stocks',
+        // activeIndex: '/stocks',
       };
     },
     methods: {

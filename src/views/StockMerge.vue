@@ -5,7 +5,7 @@
       <el-col :span="6" :offset="3"><stock-info :stock="stock" align="center"></stock-info></el-col>
     </el-row>
 
-    <el-tabs :tab-position="left" v-model="activeName" type="border-card" style="margin-bottom: 30px;">
+    <el-tabs v-model="activeName" type="border-card" style="margin-bottom: 30px;">
       <el-tab-pane name="first" :key="'first'">
         <span slot="label"><i class="el-icon-date"></i> 每日指标</span>
         <daily-list
@@ -25,6 +25,7 @@
                 @filterChange="share_filterChange"
                 @pageChange="share_pageChange"
                 @sortChange="share_sortChange"
+                :state="true"
         ></share-list>
       </el-tab-pane>
     </el-tabs>
@@ -68,11 +69,13 @@
       };
     },
     mounted(){
-
+      let myTab = this.$route.query.myTab;
+      this.activeName = myTab;
     },
     methods: {
       prev(){
         this.$router.go(-1)
+        // this.$router.back()
       },
       daily_sortChange(prop, order) {
         this.daily_context.prop = prop
