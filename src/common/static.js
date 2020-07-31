@@ -16,5 +16,16 @@ export const val_dict = {
 
 export const con_dict = {
   'current': '当前',
-  'continues': '连续'
+  'continues': '连续',
+  'level': '历史水平'
+}
+
+export const stock_dict = {
+  "ts_code": "股票代码",
+  "symbol": "股票编号",
+  "name": "股票名称",
+  "area": "所在区域",
+  "industry": "所属行业",
+  "list_date": "上市日期",
+  "share_times": "分红次数",
 }

@@ -10,6 +10,9 @@
         <span v-if="query.con === 'continues'">
           {{query.years}}年
         </span>
+        <span v-if="query.con === 'level'">
+          （过去{{query.mouths}}个月）
+        </span>
       </span>
       <span>
         大于

@@ -11,38 +11,17 @@
       style="width: 100%"
       stripe>
       <el-table-column
-        prop="ts_code"
-        label="股票代码">
-        <template slot-scope="scope">
-          <el-link type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}</el-link>
+        v-for="(value, key) in show_dict"
+        :prop="key"
+        :label="value"
+        :sortable="['ts_code', 'symbol', 'name', 'area', 'industry'].indexOf(key)===-1"
+      >
+        <template
+          slot-scope="scope">
+          <el-link v-if="key==='ts_code'" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}
+          </el-link>
+          <span v-else>{{scope.row[key]}}</span>
         </template>
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="名称">
-      </el-table-column>
-      <el-table-column
-        prop="area"
-        label="地区">
-      </el-table-column>
-      <el-table-column
-        prop="industry"
-        label="行业">
-      </el-table-column>
-      <el-table-column
-        sortable="custom"
-        prop="list_date"
-        label="上市日期">
-      </el-table-column>
-      <el-table-column
-        sortable="custom"
-        prop="share_times"
-        label="分红次数">
-      </el-table-column>
-      <el-table-column
-        sortable="custom"
-        prop="close"
-        label="当前股价">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -60,6 +39,7 @@
 
 <script>
   import {formatDate} from "../common/utils";
+  import {stock_dict, val_dict} from "../common/static";
 
   export default {
     name: "StockList",
@@ -79,7 +59,26 @@
         loading: true
       }
     },
-
+    computed: {
+      show_dict() {
+        let s_dict = Object.assign({}, stock_dict, val_dict)
+        let show_dict = {}
+        if (this.stocks_back.length > 0) {
+          for (let key in this.stocks_back[0]) {
+            if (key in s_dict)
+              show_dict[key] = s_dict[key]
+            else {
+              let temp = key.split('-')
+              let label = ''
+              if (temp[0] === 'current_level')
+                label += s_dict[temp[1]] + "历史水平（过去" + temp[2].toString() + "个月)"
+              show_dict[key] = label
+            }
+          }
+        }
+        return show_dict
+      }
+    },
     watch: {
       search(val, oldVal) {
         this.stocks_back = this.stocks.filter(item => {

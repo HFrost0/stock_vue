@@ -43,6 +43,13 @@
         queries: []
       }
     },
+    watch:{
+      queries(){
+        if(this.queries.length === 0){
+          this.submitQuery()
+        }
+      }
+    },
     methods: {
       dropItem(index) {
         this.queries.splice(index, 1)

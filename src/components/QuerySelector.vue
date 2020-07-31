@@ -34,6 +34,10 @@
       <span v-if="query.con==='continues'">
         <el-input-number v-model="query.years" controls-position="right" :min="1" :max="10"></el-input-number>年
       </span>
+      <!--当条件为历史水平时-->
+      <span v-if="query.con==='level'">
+        （过去<el-input-number v-model="query.mouths" controls-position="right" :min="1" :max="120"></el-input-number>个月）
+      </span>
 
       <span v-if="query.con!==''">
         大于<el-input-number v-model="query.min" controls-position="right"></el-input-number>
@@ -56,11 +60,25 @@
     name: "QuerySelector",
     computed: {
       available_cons() {
-        let cons = {'current': '当前'}
+        // 在所有字段上提供历史水平查询
+        let cons = {'current': '当前', 'level': '历史水平'}
+        // 限制：仅在用户选择股息率时提供该累计选项，但实际上后端可以处理所有daily basic上的累计查询类型
         if (this.query.val === 'dv_ratio') {
           cons['continues'] = '累计'
         }
         return cons
+      }
+    },
+    watch:{
+      'query.con'(){
+        if (this.query.con === 'level'){
+          this.query.min = 0.01
+          this.query.max = 0.5
+        }
+        else{
+          this.query.min = 0
+          this.query.max = 10
+        }
       }
     },
     data() {
@@ -69,7 +87,10 @@
         query: {
           val: '',
           con: '',
-          years: 0,
+          // 专门为累计类型提供的变量
+          years: 1,
+          // 专门为历史水平类型提供的变量
+          mouths: 1,
           min: 0,
           max: 10,
         },
@@ -83,7 +104,8 @@
         this.query = {
           val: '',
           con: '',
-          years: 0,
+          years: 1,
+          mouths: 1,
           min: 0,
           max: 10,
         }
