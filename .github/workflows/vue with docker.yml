@@ -8,7 +8,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         
-      - name: setup node and build dist
+      - name: setup node
         uses: actions/setup-node@v1
         with:
           node-version: '14'
