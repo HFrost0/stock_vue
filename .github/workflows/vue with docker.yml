@@ -1,8 +1,8 @@
-name: Vue Test
+name: Vue developement with docker and ssh
 on: [push]
 jobs: 
-  build_dist:
-    name: build_dist
+  build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -13,6 +13,7 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm run build
+        
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
@@ -21,4 +22,16 @@ jobs:
           registry: registry.cn-shanghai.aliyuncs.com
           repository: hfrost/stock_vue
           tags: 1.1
+          
+      - name: connect server and pull image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER_NAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            docker stop stock_vue
+            docker rm stock_vue
+            docker pull registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:1.1
+            docker run -d -p 80:80 --name stock_vue registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:1.1
 
