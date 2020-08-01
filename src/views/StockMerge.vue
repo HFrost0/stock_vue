@@ -69,8 +69,7 @@
       };
     },
     mounted(){
-      let myTab = this.$route.query.myTab;
-      this.activeName = myTab;
+      this.activeName = this.$route.query.myTab;
     },
     methods: {
       prev(){

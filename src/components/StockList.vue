@@ -14,7 +14,7 @@
         v-for="(value, key) in show_dict"
         :prop="key"
         :label="value"
-        :sortable="['ts_code', 'symbol', 'name', 'area', 'industry'].indexOf(key)===-1"
+        :sortable="['symbol', 'name', 'area', 'industry'].indexOf(key)===-1"
       >
         <template
           slot-scope="scope">
