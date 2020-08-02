@@ -18,12 +18,12 @@ const routes = [
   },
   {
     path: '/stock_detail',
-    name: 'StockMerge',
+    name: 'StockDetail',
     meta: {
       navShow: true,
       title: '股票详情',
     },
-    component: () => import('../views/StockMerge')
+    component: () => import('../views/StockDetail')
   },
   {
     path: '/shares',

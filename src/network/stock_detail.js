@@ -7,6 +7,13 @@ export function getStock(params) {
   })
 }
 
+export function getStockDaily(params) {
+  return request({
+    url:'/get_daily_basics',
+    params
+  })
+}
+
 export function getShareList(params) {
   return request({
     url:'/get_shares',
