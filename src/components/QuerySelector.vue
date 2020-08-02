@@ -40,8 +40,8 @@
       </span>
 
       <span v-if="query.con!==''">
-        大于等于<el-input-number v-model="query.min" :controls="false" :min="0" :max="query.con==='level'?1:3e20" :precision="2" @input="inputCheck"></el-input-number>
-        小于等于<el-input-number v-model="query.max" :controls="false" :min="0" :max="query.con==='level'?1:3e20" :precision="2" @input="inputCheck"></el-input-number>
+        大于等于<el-input-number v-model="query.min" controls-position="right" :min="0" :max="query.con==='level'?1:3e20" :precision="2" :step="0.1" @input="inputCheck"></el-input-number>
+        小于等于<el-input-number v-model="query.max" controls-position="right" :min="0" :max="query.con==='level'?1:3e20" :precision="2" :step="0.1" @input="inputCheck"></el-input-number>
       </span>
 
       <span v-if="query.con!==''" class="button">
@@ -74,7 +74,7 @@
         if (this.query.con === 'level') {
           this.query.mouths = 1
           this.query.min = 0
-          this.query.max = 0.5
+          this.query.max = 1.00
         } else {
           this.query.min = 0
           this.query.max = 10
