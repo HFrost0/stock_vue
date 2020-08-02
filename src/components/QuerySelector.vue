@@ -36,7 +36,7 @@
       </span>
       <!--当条件为历史水平时-->
       <span v-if="query.con==='level'">
-        （过去<el-input-number v-model="query.mouths" controls-position="right" :min="1" :max="120" :precision="0"></el-input-number>个月）
+        （过去<el-input-number v-model="query.mouths" controls-position="right" :min="1" :max="24" :precision="0"></el-input-number>个月）
       </span>
 
       <span v-if="query.con!==''">
