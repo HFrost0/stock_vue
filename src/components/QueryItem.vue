@@ -15,13 +15,13 @@
         </span>
       </span>
       <span>
-        大于
+        大于等于
       </span>
       <span class="number">
         {{query.min}}
       </span>
       <span>
-       小于
+       小于等于
       </span>
       <span class="number">
         {{query.max}}

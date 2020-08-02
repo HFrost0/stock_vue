@@ -32,16 +32,16 @@
 
       <!--当条件为累计时-->
       <span v-if="query.con==='continues'">
-        <el-input-number v-model="query.years" controls-position="right" :min="1" :max="10"></el-input-number>年
+        <el-input-number v-model="query.years" controls-position="right" :min="1" :max="10" :precision="0"></el-input-number>年
       </span>
       <!--当条件为历史水平时-->
       <span v-if="query.con==='level'">
-        （过去<el-input-number v-model="query.mouths" controls-position="right" :min="1" :max="120"></el-input-number>个月）
+        （过去<el-input-number v-model="query.mouths" controls-position="right" :min="1" :max="120" :precision="0"></el-input-number>个月）
       </span>
 
       <span v-if="query.con!==''">
-        大于<el-input-number v-model="query.min" controls-position="right"></el-input-number>
-        小于<el-input-number v-model="query.max" controls-position="right"></el-input-number>
+        大于等于<el-input-number v-model="query.min" :controls="false" :min="0" :max="query.con==='level'?1:3e20" :precision="2" @input="inputCheck"></el-input-number>
+        小于等于<el-input-number v-model="query.max" :controls="false" :min="0" :max="query.con==='level'?1:3e20" :precision="2" @input="inputCheck"></el-input-number>
       </span>
 
       <span v-if="query.con!==''" class="button">
@@ -69,14 +69,13 @@
         return cons
       }
     },
-    watch:{
-      'query.con'(){
-        if (this.query.con === 'level'){
+    watch: {
+      'query.con'() {
+        if (this.query.con === 'level') {
           this.query.mouths = 1
-          this.query.min = 0.01
+          this.query.min = 0
           this.query.max = 0.5
-        }
-        else{
+        } else {
           this.query.min = 0
           this.query.max = 10
         }
@@ -109,6 +108,12 @@
           mouths: 1,
           min: 0,
           max: 10,
+        }
+      },
+      //todo 在用户连续两次以上违反该条件时输入框不能正确的反映当前的min和max值
+      inputCheck() {
+        if (this.query.min > this.query.max) {
+          this.query.min = this.query.max
         }
       }
     }
