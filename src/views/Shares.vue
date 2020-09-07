@@ -2,8 +2,7 @@
   <div>
     <div class="block">
       <el-input
-        @change="textChange"
-        placeholder="输入代码或名称后回车"
+        placeholder="输入股票代码或名称"
         v-model="search_text"
         clearable>
       </el-input>
@@ -39,6 +38,7 @@
 <script>
   import ShareList from "../components/ShareList";
   import {getShareList} from "../network/shares";
+  // import {debounce} from "../common/utils";
 
   export default {
     name: "Shares",
@@ -48,6 +48,7 @@
         total: 0,
         shares: [],
         dates: ['', ''],
+        timeout: null,
         options: [
           {
             value: 'imp_ann_date',
@@ -90,10 +91,20 @@
         }
       },
     },
+    watch: {
+      // search_text() {
+      //   debounce(this.$refs.share_list.handleCurrentChange, 500)(1)
+      // }
+
+      // 防抖
+      search_text() {
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          this.$refs.share_list.handleCurrentChange(1)
+        }, 500)
+      }
+    },
     methods: {
-      textChange() {
-        this.$refs.share_list.handleCurrentChange(1)
-      },
       filterChange(proc_filter) {
         this.context.proc_filter = proc_filter
       },
