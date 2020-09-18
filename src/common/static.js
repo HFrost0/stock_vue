@@ -14,6 +14,22 @@ export const val_dict = {
   'circ_mv': '流通市值(万元)',
 }
 
+export const val_level_dict = {
+  'close_lev': ['历史股价', 'close','level'],
+  'dv_ratio_lev': ['历史股息率（%）', 'dv_ratio','level'],
+  'dv_ttm_lev': ['历史股息率(TTM)', 'dv_ttm','level'],
+  'pe_lev': ['历史市盈率', 'pe','level'],
+  'pe_ttm_lev': ['历史市盈率（TTM）', 'pe_ttm','level'],
+  'pb_lev': ['历史市净率', 'pb','level'],
+  'ps_lev': ['历史市销率', 'ps','level'],
+  'ps_ttm_lev': ['历史市销率(TTM)', 'ps_ttm','level'],
+  'total_share_lev': ['历史总股本(万股)', 'total_share','level'],
+  'float_share_lev': ['历史流通股本(万股)', 'float_share','level'],
+  'free_share_lev': ['历史自由流通股本(万股)', 'free_share','level'],
+  'total_mv_lev': ['历史总市值(万元)', 'total_mv','level'],
+  'circ_mv_lev': ['历史流通市值(万元)', 'circ_mv','level'],
+}
+
 export const con_dict = {
   'current': '当前',
   'continues': '连续',

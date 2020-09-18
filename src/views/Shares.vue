@@ -77,7 +77,7 @@
           //分页偏移
           offset: 0,
           //页长度
-          page_size: 10,
+          page_size: 15,
           //时间属性
           time_type: this.time_type,
           //时间开始点 先判断是否为null（在用户点击x后会变成null，不处理将报错）
