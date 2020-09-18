@@ -97,6 +97,8 @@ export default {
     getStocks({queries: this.queries}).then(res => {
       this.stocks = res.data['stocks']
       this.$refs.stock_list.loading = false
+    }).catch(err=>{
+      console.log(err)
     })
   },
 

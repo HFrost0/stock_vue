@@ -14,17 +14,24 @@ export function request(config) {
   //1. 当config中的请求不符合服务器的要求时需要拦截
   //2. 当请求的时候显示一个圆圈转啊转
   //3. 某些网络请求（登录）携带特殊的东西（token）提示用户登录
-  instance.interceptors.request.use(config=>{
+  instance.interceptors.request.use(config => {
+    config.headers.common['Authorization'] = localStorage.getItem('user') ? 'Bearer ' + JSON.parse(localStorage.user).token : ''
     return config
-  },error => {
+  }, error => {
     //发送都没发送出去，进入下面
     console.log(error)
   })
   //回应拦截器
-  instance.interceptors.response.use(res=>{
+  instance.interceptors.response.use(res => {
     return res
-  },error => {
-    console.log(error);
+  }, error => {
+    console.log(error.response);
+    // invalid token
+    if(error.response.status === 401){
+      this.$router.push('/')
+      this.$store.dispatch('logout')
+    }
+    return Promise.reject(error)
   })
   console.log(config)
   return instance(config)

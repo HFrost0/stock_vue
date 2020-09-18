@@ -9,6 +9,22 @@ const routes = [
     redirect: '/stocks'
   },
   {
+    path: '/authenticate',
+    name: 'Authenticate',
+    meta: {
+      title: '用户登录'
+    },
+    component:()=> import('../views/Authenticate')
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    meta:{
+      title: 'test'
+    },
+    component:()=>import('../views/Test')
+  },
+  {
     path: '/stocks',
     name: 'Stocks',
     meta: {
@@ -42,9 +58,16 @@ const router = new VueRouter({
 
 //全局守卫修改标题,前置钩子
 router.beforeEach(((to, from, next) => {
-  //从from跳转到to
-  document.title = to.matched[0].meta.title
+  // redirect to login page if user is not logged in and trying to access a restricted page
+  const authPages = ['/test', ]
+  const authRequired = authPages.includes(to.path)
+  const loggedIn = localStorage.getItem('user')
+
+  if (authRequired && !loggedIn) {
+    return next('/authenticate')
+  }
   next()
+  document.title = to.matched[0].meta.title
 }))
 //全局，后置钩子
 router.afterEach(((to, from) => {
