@@ -14,15 +14,23 @@ const routes = [
     meta: {
       title: '用户登录'
     },
-    component:()=> import('../views/Authenticate')
+    component: () => import('../views/Authenticate')
+  },
+  {
+    path: '/user_space',
+    name: 'UserSpace',
+    meta: {
+      title: '个人空间'
+    },
+    component: () => import('../views/UserSpace')
   },
   {
     path: '/test',
     name: 'Test',
-    meta:{
+    meta: {
       title: 'test'
     },
-    component:()=>import('../views/Test')
+    component: () => import('../views/Test')
   },
   {
     path: '/stocks',
@@ -59,7 +67,7 @@ const router = new VueRouter({
 //全局守卫修改标题,前置钩子
 router.beforeEach(((to, from, next) => {
   // redirect to login page if user is not logged in and trying to access a restricted page
-  const authPages = ['/test', ]
+  const authPages = ['/test', '/user_space',]
   const authRequired = authPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 
