@@ -4,8 +4,8 @@ import store from '../store'
 import router from '../router'
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/stock/api',
-  // baseURL: 'http://101.132.132.225:8000/stock/api',
+  // baseURL: 'http://127.0.0.1:8000/stock/api',
+  baseURL: 'http://101.132.132.225:8000/stock/api',
   paramsSerializer: params => {
     return qs.stringify(params, {indices: false})
   }
