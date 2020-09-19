@@ -1,8 +1,14 @@
 <template>
   <div>
     <h1>用户注册</h1>
-    <input type="text" v-model="username">
-    <input type="text" v-model="password">
+    <label for="username">
+      Username:
+    </label>
+    <input type="text" id="username" v-model="username">
+    <label for="password">
+      password:
+    </label>
+    <input type="text" id="password" v-model="password">
     <p v-if="status === 400">
       Please enter different info.
     </p>

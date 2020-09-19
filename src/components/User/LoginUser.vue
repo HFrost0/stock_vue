@@ -2,14 +2,14 @@
   <div>
     <h1>用户登录</h1>
     <form @submit.prevent="login">
-      <label for="email">
-        Email:
+      <label for="username">
+        Username:
       </label>
-      <input v-model="username" type="text" name="email" value>
+      <input v-model="username" type="text" id="username" value>
       <label for="password">
         Password:
       </label>
-      <input v-model="password" type="password" name value>
+      <input v-model="password" type="password" id="password" name value>
       <p v-if="status === 400">
         Invalid login info.
       </p>

@@ -1,9 +1,11 @@
 import axios from 'axios'
 import qs from "qs";
+import store from '../store'
+import router from '../router'
 
 const instance = axios.create({
-  // baseURL: 'http://127.0.0.1:8000/stock/api',
-  baseURL: 'http://101.132.132.225:8000/stock/api',
+  baseURL: 'http://127.0.0.1:8000/stock/api',
+  // baseURL: 'http://101.132.132.225:8000/stock/api',
   paramsSerializer: params => {
     return qs.stringify(params, {indices: false})
   }
@@ -23,13 +25,15 @@ export function request(config) {
   })
   //回应拦截器
   instance.interceptors.response.use(res => {
+    //todo refresh token
+
+    // console.log(res)
     return res
   }, error => {
-    console.log(error.response);
     // invalid token
     if(error.response.status === 401){
-      this.$router.push('/')
-      this.$store.dispatch('logout')
+      router.push('/')
+      store.dispatch('logout')
     }
     return Promise.reject(error)
   })
