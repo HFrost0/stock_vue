@@ -2,10 +2,10 @@
   <div id="nav">
     <el-row type="flex" justify="space-between">
       <el-col :span="22">
-        <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item v-if="!$route.meta.navShow" index="/stocks">股票</el-menu-item>
-          <el-menu-item v-if="!$route.meta.navShow" index="/shares">分红</el-menu-item>
-          <el-menu-item v-if="!$route.meta.navShow&&user" index="/test">权限界面</el-menu-item>
+        <el-menu v-if="!$route.meta.navHide" :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu-item index="/stocks">股票</el-menu-item>
+          <el-menu-item  index="/shares">分红</el-menu-item>
+          <el-menu-item v-if="user" index="/test">权限界面</el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="2" class="auth">

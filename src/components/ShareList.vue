@@ -129,8 +129,9 @@
       shares: {
         type: Array,
       },
+      // 该组件是在详情页面还是分红页面被引用的状态
       state: {
-        type: Array
+        type: Boolean
       }
     },
     computed: {
