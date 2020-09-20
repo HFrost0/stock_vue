@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div class="auth">
     <component :is="loginOrRegister" />
     <a
         v-show="isNewUser"
         class="auth-link"
         @click="toggleComponent"
-    >Don't have an account? Create one.</a>
+    >还没有账户？注册</a>
     <a
         v-show="!isNewUser"
         class="auth-link"
         @click="toggleComponent"
-    >Already have an account? Login.</a>
+    >已经有账户？登录</a>
   </div>
 </template>
 
@@ -44,5 +44,11 @@ export default {
   text-decoration: underline;
   color: #2c3e50;
   cursor: pointer;
+}
+.auth{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 </style>

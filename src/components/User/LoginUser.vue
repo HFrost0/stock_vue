@@ -1,23 +1,22 @@
 <template>
-  <div>
-    <h1>用户登录</h1>
-    <form @submit.prevent="login">
-      <label for="username">
-        Username:
-      </label>
-      <input v-model="username" type="text" id="username" value>
-      <label for="password">
-        Password:
-      </label>
-      <input v-model="password" type="password" id="password" name value>
+  <div class="login">
+    <div>
+      <h3>用户登录</h3>
+    </div>
+    <el-form>
       <p v-if="status === 400">
-        Invalid login info.
+        Invalid login.
       </p>
-      <button type="submit" name="button">
-        Login
-      </button>
-    </form>
-
+      <el-form-item label="用户名">
+        <el-input v-model="username"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="pass">
+        <el-input type="password" v-model="password" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button @click="login">登录</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
