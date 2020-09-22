@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="block">
     <el-divider content-position="left"><i class="el-icon-edit"></i>添加一个条件</el-divider>
     <query-selector
         ref="query_selector"
@@ -129,5 +129,8 @@ export default {
 [class^="el-icon"] {
   margin-right: 10px;
 }
+  .block {
+    margin-left: 80px; margin-right: 80px;
+  }
 
 </style>
