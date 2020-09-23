@@ -1,45 +1,48 @@
 <template>
   <div>
-    <el-input
-        v-model="search"
-        size="small"
-        placeholder="输入股票代码或名称查询"
-        style="width: 30%;"/>
+    <el-input class="input_style"
+      v-model="search"
+      size="small"
+      placeholder="输入股票代码或名称"/>
     <el-table
-        v-loading="loading"
-        @sort-change="sortChange"
-        :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-        style="width: 100%"
-        stripe>
+      v-loading="loading"
+      @sort-change="sortChange"
+      :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+      style="width: 100%"
+      stripe
+      :header-cell-style="{color: '#545c64'}">
       <el-table-column
-          v-for="(value, key) in show_dict"
-          :prop="key"
-          :label="value"
-          :sortable="['symbol', 'name', 'area', 'industry'].indexOf(key)===-1">
+        v-for="(value, key) in show_dict"
+        :prop="key"
+        :label="value"
+        :sortable="['symbol', 'name', 'area', 'industry'].indexOf(key)===-1"
+      >
         <template
-            slot-scope="scope">
-          <el-link v-if="key==='ts_code'" type="primary" @click="stockDetail(scope.row)">{{ scope.row['ts_code'] }}
+          slot-scope="scope">
+          <el-link v-if="key==='ts_code'" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}
           </el-link>
-          <span v-else>{{ scope.row[key] }}</span>
+          <span v-else>{{scope.row[key]}}</span>
         </template>
       </el-table-column>
     </el-table>
     <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[20, 100, 200, 400]"
-        :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="stocks_back.length">
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[20, 100, 200, 400]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="stocks_back.length">
       >
     </el-pagination>
   </div>
 </template>
 
 <script>
+
 import {formatDate} from "../common/utils";
 import {stock_dict, query_dict} from "../common/static";
+
 
 export default {
   name: "StockList",
@@ -124,10 +127,10 @@ export default {
         this.currentPage = 1
       }
     }
-  },
-
+  }
 }
 </script>
 
 <style scoped>
+
 </style>

@@ -46,7 +46,7 @@ const routes = [
     path: '/stock_detail',
     name: 'StockDetail',
     meta: {
-      navHide: true,
+      // navHide: true,
       title: '股票详情',
     },
     component: () => import('../views/StockDetail')
@@ -69,11 +69,12 @@ const router = new VueRouter({
 //全局守卫修改标题,前置钩子
 router.beforeEach(((to, from, next) => {
   // redirect to login page if user is not logged in and trying to access a restricted page
+  // const loggedIn = this.$store.state.user
   const loggedIn = localStorage.getItem('user')
   const authRequired = to.matched.some(record => record.meta.requiresAuth)
 
   if (authRequired && !loggedIn) {
-    return next('/authenticate')
+    next('/authenticate')
   }
   next()
   document.title = to.matched[0].meta.title

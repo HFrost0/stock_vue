@@ -5,7 +5,8 @@
       @sort-change="sortChange"
       :data="daily_basics_back"
       style="width: 100%"
-      stripe>
+      stripe
+      :header-cell-style="{color: '#545c64'}">
       <el-table-column
         prop="ts_code_id"
         label="股票代码">

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-divider content-position="left"><i class="el-icon-edit"></i>添加一个条件</el-divider>
+  <div class="block">
+    <el-divider content-position="left"><i class="el-icon-edit"></i><span class="font">添加一个条件</span></el-divider>
     <query-selector
         ref="query_selector"
         @filter="filter"
@@ -21,7 +21,7 @@
     <!--      </span>-->
     <!--      <div v-else class="without"><p>当前没有条件</p></div>-->
     <!--    </div>-->
-    <el-divider content-position="left"><i class="el-icon-search"></i>符合条件的股票</el-divider>
+    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的股票</span></el-divider>
     <el-card>
       <stock-list
           ref="stock_list"
@@ -129,5 +129,13 @@ export default {
 [class^="el-icon"] {
   margin-right: 10px;
 }
+  .block {
+    margin-left: 80px; margin-right: 80px;
+  }
+  .font{
+    font-weight: bold;
+    font-size: 15px;
+    color: #545c64;
+  }
 
 </style>

@@ -26,7 +26,14 @@ export const val_dict = {
   'free_share_lev': ['历史自由流通股本(万股)', 'free_share','level'],
   'total_mv_lev': ['历史总市值(万元)', 'total_mv','level'],
   'circ_mv_lev': ['历史流通市值(万元)', 'circ_mv','level'],
+
+  'dv_ratio_con': ['累计股息率', 'dv_ratio','continues'],
 }
+
+// export const val_other_dict = {
+//   'max_high': ['近日创历史新高', 'close','level'],
+//   'max_low': ['近日创历史新低', 'close','level'],
+// }
 
 export const con_dict = {
   'current': '当前',
