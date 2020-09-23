@@ -46,7 +46,7 @@ const routes = [
     path: '/stock_detail',
     name: 'StockDetail',
     meta: {
-      navHide: true,
+      // navHide: true,
       title: '股票详情',
     },
     component: () => import('../views/StockDetail')

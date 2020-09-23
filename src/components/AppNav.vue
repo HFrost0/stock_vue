@@ -2,13 +2,20 @@
   <div id="nav">
     <el-row type="flex" justify="space-between">
       <el-col :span="22">
-        <el-menu v-if="!$route.meta.navHide" :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu v-if="!$route.meta.navHide" :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64"
+                 text-color="#fff"
+                 active-text-color="#ffd04b">
+          <el-menu-item>
+            <el-image style="width: 120px; height: 50px"
+                      :src="require('@/assets/logo.png')">
+            </el-image>
+          </el-menu-item>
           <el-menu-item index="/stocks">股票</el-menu-item>
           <el-menu-item  index="/shares">分红</el-menu-item>
           <el-menu-item v-if="user" index="/test">权限界面</el-menu-item>
         </el-menu>
       </el-col>
-      <el-col :span="2" class="auth">
+      <el-col :span="2" class="auth" style="height: 60.4px">
         <template v-if="user">
           <el-dropdown>
             <div @click="userSpace">
@@ -21,7 +28,7 @@
           </el-dropdown>
         </template>
         <template v-else>
-          <el-button icon="el-icon-user-solid" @click="auth" circle></el-button>
+          <el-button class="info1" icon="el-icon-user-solid" @click="auth" circle></el-button>
           <el-link class="info" :underline="false" @click="auth">登录</el-link>
         </template>
       </el-col>
@@ -65,9 +72,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color:#545c64;
 }
 
-.info {
+.el-link.info {
+  color: #fff;
   margin-left: 5px;
 }
 
@@ -78,4 +87,27 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+.el-link.info:hover{
+  color: #ffd04b;
+}
+.el-link.info:active{
+  color: #ffd04b;
+}
+.info1{
+  color: #545c64;
+  border-color:#545c64;
+}
+.el-button.info1:hover{
+  color: #ffd04b;
+  border-color:#545c64;
+}
+.el-button.info1:active{
+  color: #ffd04b;
+  border-color:#545c64;
+}
+.el-icon .info1{
+    color: #545c64;
+}
+
 </style>

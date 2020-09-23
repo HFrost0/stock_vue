@@ -30,6 +30,15 @@ export const val_level_dict = {
   'circ_mv_lev': ['历史流通市值(万元)', 'circ_mv','level'],
 }
 
+export const val_continue_dict = {
+  'dv_ratio_con': ['累计股息率', 'dv_ratio','continues'],
+}
+
+// export const val_other_dict = {
+//   'max_high': ['近日创历史新高', 'close','level'],
+//   'max_low': ['近日创历史新低', 'close','level'],
+// }
+
 export const con_dict = {
   'current': '当前',
   'continues': '连续',
