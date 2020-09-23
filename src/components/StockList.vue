@@ -39,7 +39,7 @@
 
 <script>
 import {formatDate} from "../common/utils";
-import {stock_dict, val_dict} from "../common/static";
+import {stock_dict, query_dict} from "../common/static";
 
 export default {
   name: "StockList",
@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     show_dict() {
-      let s_dict = Object.assign({}, stock_dict, val_dict)
+      let s_dict = Object.assign({}, stock_dict, query_dict)
       let show_dict = {}
       if (this.stocks_back.length > 0) {
         for (let key in this.stocks_back[0]) {
