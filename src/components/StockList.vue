@@ -1,15 +1,16 @@
 <template>
   <div>
-    <el-input
+    <el-input class="input_style"
       v-model="search"
-      size="mini"
-      placeholder="查询"/>
+      size="small"
+      placeholder="输入股票代码或名称"/>
     <el-table
       v-loading="loading"
       @sort-change="sortChange"
       :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
       style="width: 100%"
-      stripe>
+      stripe
+      :header-cell-style="{color: '#545c64'}">
       <el-table-column
         v-for="(value, key) in show_dict"
         :prop="key"

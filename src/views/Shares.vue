@@ -1,44 +1,45 @@
 <template>
   <div class="block">
     <div>
-      <el-divider content-position="left"><i class="el-icon-edit"></i>选择条件</el-divider>
+      <el-divider content-position="left"><i class="el-icon-edit"></i><span class="font">选择条件</span></el-divider>
       <el-card>
-      <el-row :gutter="20">
-        <el-col :span="5">
-          <el-input
-                placeholder="输入股票代码或名称"
-                v-model="search_text"
-                clearable>
-          </el-input>
-        </el-col>
-        <el-col :span="4">
-          <el-select v-model="time_type" placeholder="请选择日期筛选类型">
-            <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-            </el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="6.5">
-          <el-date-picker
-                  unlink-panels
-                  v-model="dates"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  end-placeholder="结束日期">
-          </el-date-picker>
-        </el-col>
-        <el-col :span="2">
-          <el-button @click="dateRange">GO</el-button>
-        </el-col>
+      <el-row type="flex" justify="start">
+        <el-col :span="1"></el-col>
+
+        <el-input
+               placeholder="输入股票代码或名称"
+               v-model="search_text"
+               clearable>
+        </el-input>
+        <el-col :span="1"></el-col>
+        <el-select v-model="time_type" placeholder="请选择日期筛选类型">
+          <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+          </el-option>
+        </el-select>
+
+        <el-col :span="1"></el-col>
+        <el-date-picker
+                unlink-panels
+                v-model="dates"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期">
+        </el-date-picker>
+
+        <el-col :span="1"></el-col>
+
+        <el-button class="but_color" @click="dateRange">GO</el-button>
+
 
       </el-row>
       </el-card>
     </div>
-    <el-divider content-position="left"><i class="el-icon-search"></i>符合条件的股票</el-divider>
+    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的股票</span></el-divider>
     <el-card>
     <share-list
       ref="share_list"
@@ -161,7 +162,31 @@
     margin-left: 80px; margin-right: 80px; margin-top: 20px;
   }
   .el-input{
-    width: 270px;
+    width: 300px;
+  }
+  .row-bg {
+    padding: 10px 0;
+  }
+  [class^="el-icon"] {
+    margin-right: 10px;
+  }
+  .font{
+    font-weight: bold;
+    color: #545c64;
+    font-size: 15px;
+  }
+  .but_color{
+    color: #545c64;
+    border-color:#dadbdc;
+    background-color: #fff;
+  }
+  .el-button.but_color:hover{
+    border-color: #dadbdc;
+    background-color: #F5F5F5;
+  }
+  .el-button.but_color:active{
+    border-color: #dadbdc;
+    background-color: #F5F5F5;
   }
 
 </style>

@@ -35,8 +35,8 @@ export const val_continue_dict = {
 }
 
 // export const val_other_dict = {
-//   'max_high': '近日创历史新高',
-//   'max_low': '近日创历史新低'
+//   'max_high': ['近日创历史新高', 'close','level'],
+//   'max_low': ['近日创历史新低', 'close','level'],
 // }
 
 export const con_dict = {
