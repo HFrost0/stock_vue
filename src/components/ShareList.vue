@@ -6,7 +6,7 @@
       @sort-change="sortChange"
       @filter-change="filterChange"
       :data="shares_back"
-      style="width: 100%"
+      style="width: 100%;"
       stripe
       :header-cell-style="{color: '#545c64'}">
       <el-table-column

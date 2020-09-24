@@ -1,14 +1,14 @@
 <template>
   <div id="nav">
-    <el-row type="flex" justify="space-between">
-      <el-row :span="2">
+    <el-row>
+      <el-col :span="3">
         <div style="height: 60.4px; background-color: #545c64">
-          <el-image style="width: 120px; height: 50px; margin-top: 5px; margin-left: 3px"
-                    :src="require('../assets/logo.png')">
+          <el-image style="width: 120px;  margin-top: 10px; margin-left: 10px"
+                    :src="logourl">
           </el-image>
         </div>
-      </el-row>
-      <el-col :span="20">
+      </el-col>
+      <el-col  :span="19">
         <el-menu v-if="!$route.meta.navHide" :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ffd04b">
@@ -17,7 +17,7 @@
           <el-menu-item v-if="user" index="/test">权限界面</el-menu-item>
         </el-menu>
       </el-col>
-      <el-col :span="2" class="auth" style="height: 60.4px">
+      <el-col  class="auth" style="height: 60.4px" :span="2">
         <template v-if="user">
           <el-dropdown>
             <div @click="userSpace">
@@ -43,7 +43,8 @@ export default {
   name: "AppNav",
   data() {
     return {
-      circleUrl: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+      circleUrl: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+      logourl: require('../assets/logo.png'),
     }
   },
   computed: {
