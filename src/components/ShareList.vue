@@ -13,7 +13,7 @@
         prop="ts_code_id"
         label="股票代码">
         <template slot-scope="scope">
-          <el-link v-if="!state" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
+          <el-link class="link_color" v-if="!state" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code_id']}}</el-link>
           <span v-else>{{scope.row['ts_code_id']}}</span>
         </template>
       </el-table-column>
@@ -184,5 +184,10 @@
 </script>
 
 <style scoped>
-
+  .el-link.link_color:hover{
+    font-weight: bold;
+  }
+  .el-link.link_color:active{
+    font-weight: bold;
+  }
 </style>

@@ -6,21 +6,6 @@
             @filter="filter"
             @reset="reset"
     ></query-selector>
-    <!--    <el-divider content-position="left"><i class="el-icon-search"></i>当前条件</el-divider>-->
-
-    <!--    <div class="item-container">-->
-    <!--      <query-item-->
-    <!--        v-for="(query,index) in queries"-->
-    <!--        :query="query"-->
-    <!--        @dropItem="dropItem(index)"-->
-    <!--      ></query-item>-->
-    <!--当query为空时不显示按钮-->
-    <!--      <span v-if="queries.length>0" class="button">-->
-    <!--        <el-button @click="submitQuery">筛选</el-button>-->
-    <!--        <el-button @click="queries=[]">重置</el-button>-->
-    <!--      </span>-->
-    <!--      <div v-else class="without"><p>当前没有条件</p></div>-->
-    <!--    </div>-->
     <el-divider content-position="left"><i class="el-icon-circle-check"></i><span class="font">符合条件的股票</span></el-divider>
     <el-card>
       <stock-list

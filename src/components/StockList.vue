@@ -19,7 +19,7 @@
       >
         <template
           slot-scope="scope">
-          <el-link v-if="key==='ts_code'" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}
+          <el-link class="link_color" v-if="key==='ts_code'" type="primary" @click="stockDetail(scope.row)">{{scope.row['ts_code']}}
           </el-link>
           <span v-else>{{scope.row[key]}}</span>
         </template>
@@ -132,5 +132,17 @@ export default {
 </script>
 
 <style scoped>
+  .el-link.link_color:hover{
+    font-weight: bold;
+  }
+  .el-link.link_color:active{
+    font-weight: bold;
+  }
+</style>
+<style>
+  .el-pager li.active,.el-pager li:hover,
+  .el-pagination button:hover {
+    color: #EEB422;
+  }
 
 </style>

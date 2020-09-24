@@ -185,8 +185,6 @@
       addCollections() {
         if (this.user) {
           this.$prompt('请输入指标名称', '提示', {
-            confirmButtonClass:'confirm-btn',
-            cancelButtonClass: 'cancel-btn',
             inputPlaceholder: '指标名称',
             confirmButtonText: '确定',
             inputValidator: (value) => {
@@ -200,8 +198,6 @@
             value = value.trim()
             if(this.myCollections.hasOwnProperty(value)){
               this.$confirm('该名称已使用, 是否更新该指标?', '提示', {
-                confirmButtonClass:'confirm-btn',
-                cancelButtonClass: 'cancel-btn',
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 // type: 'warning'
@@ -228,8 +224,6 @@
           });
         } else {
           this.$confirm('是否跳转到登录页面?', '提示', {
-            confirmButtonClass:'confirm-btn',
-            cancelButtonClass: 'cancel-btn',
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning',
