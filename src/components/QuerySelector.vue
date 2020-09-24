@@ -115,11 +115,11 @@
 </template>
 
 <script>
-  import {val_dict} from "../common/static";
-  // import {val_level_dict} from '../common/static';
-  import {con_dict} from '../common/static';
-  import router from "@/router";
-  import {getCollections} from "@/network/collections";
+import {val_dict} from "../common/static";
+// import {val_level_dict} from '../common/static';
+import {con_dict} from '../common/static';
+import router from "@/router";
+import {getCollections} from "@/network/stocks";
 
   export default {
     name: "QuerySelector",
@@ -179,7 +179,20 @@
       tabClick(tab, event) {
         //ToDo 点击我的收藏，获取后端用户收藏数据
         if (tab.name === 'MyCollections') {
-          getCollections({uid: this.user, collections: this.myCollections})
+          getCollections().then(res => {
+            const queries = res.data['queries']
+            for (let q of queries) {
+              this.$set(this.myCollections,q.name,queries.filter(item => {
+                return item['name'] === q.name
+              }))
+              // this.myCollections[q['name']] = []
+            }
+            // for (let key in this.myCollections) {
+            //   this.myCollections[key] = queries.filter(q => {
+            //     return q['name'] === key
+            //   })
+            // }
+          })
         }
       },
       addCollections() {

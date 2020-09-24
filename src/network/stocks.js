@@ -7,3 +7,11 @@ export function getStocks(data) {
     data: data,
   })
 }
+
+export function getCollections(data) {
+  return request({
+      url:'/get_user_queries',
+      method: 'POST',
+      data: data,
+  })
+}
