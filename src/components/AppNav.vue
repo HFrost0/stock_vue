@@ -1,15 +1,17 @@
 <template>
   <div id="nav">
     <el-row type="flex" justify="space-between">
-      <el-col :span="22">
+      <el-row :span="2">
+        <div style="height: 60.4px; background-color: #545c64">
+          <el-image style="width: 120px; height: 50px; margin-top: 5px; margin-left: 3px"
+                    :src="require('../assets/logo.png')">
+          </el-image>
+        </div>
+      </el-row>
+      <el-col :span="20">
         <el-menu v-if="!$route.meta.navHide" :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64"
                  text-color="#fff"
                  active-text-color="#ffd04b">
-          <el-menu-item>
-            <el-image style="width: 120px; height: 50px"
-                      :src="require('@/assets/logo.png')">
-            </el-image>
-          </el-menu-item>
           <el-menu-item index="/stocks">股票</el-menu-item>
           <el-menu-item  index="/shares">分红</el-menu-item>
           <el-menu-item v-if="user" index="/test">权限界面</el-menu-item>
@@ -23,7 +25,7 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <p>Hello，{{user.username}}</p>
-              <el-link class="info" :underline="false" @click="logout">注销</el-link>
+              <el-link class="info2" :underline="false" @click="logout">注销</el-link>
             </el-dropdown-menu>
           </el-dropdown>
         </template>
@@ -94,6 +96,14 @@ export default {
 .el-link.info:active{
   color: #ffd04b;
 }
+.el-link.info2:hover{
+  color: #545c64;
+  font-weight: bold;
+}
+.el-link.info2:active{
+  color: #545c64;
+  font-weight: bold;
+}
 .info1{
   color: #545c64;
   border-color:#545c64;
@@ -109,5 +119,8 @@ export default {
 .el-icon .info1{
     color: #545c64;
 }
+/*.item_color.el-menu-item.is-active {*/
+/*  border-bottom: none;*/
+/*}*/
 
 </style>

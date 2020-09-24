@@ -17,7 +17,7 @@
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="registry('ruleForm')">提交</el-button>
+        <el-button class="but_color" @click="registry('ruleForm')">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -90,5 +90,18 @@ export default {
 <style scoped>
 .registry {
 
+}
+.but_color{
+  color: #545c64;
+  border-color:#dadbdc;
+  background-color: #fff;
+}
+.el-button.but_color:hover{
+  border-color: #dadbdc;
+  background-color: #F5F5F5;
+}
+.el-button.but_color:active{
+  border-color: #dadbdc;
+  background-color: #F5F5F5;
 }
 </style>
