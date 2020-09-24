@@ -162,17 +162,7 @@ import {getCollections} from "@/network/stocks";
       }
     },
     watch: {
-      'query.con'() {
-        if (this.query.con === 'level') {
-          this.query.mouths = 1
-          this.query.min_num = 0
-          this.query.max_num = 1.00
-        } else {
-          this.value = [0, 2000]
-          this.query.min_num = this.value[0]
-          this.query.max_num = this.value[1]
-        }
-      }
+
     },
 
     methods: {

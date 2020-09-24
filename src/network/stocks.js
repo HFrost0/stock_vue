@@ -15,3 +15,10 @@ export function getCollections(data) {
       data: data,
   })
 }
+
+export function get_range(data) {
+    return request({
+        url:'/get_range',
+        params: data,
+    })
+}
