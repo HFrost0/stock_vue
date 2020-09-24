@@ -1,7 +1,8 @@
 <template>
   <div>
     <el-card>
-      <el-tabs class="tabs" @tab-click="tabClick" v-model="activeName" tab-position="left" type="card" style="height: 200px;">
+      <el-tabs class="tabs" @tab-click="tabClick" v-model="activeName" tab-position="left" type="card"
+               style="height: 200px;">
         <el-tab-pane name="basicIndex">
           <span slot="label"><i class="el-icon-data-line"></i> 当前行情</span>
           <el-checkbox-group v-model="checkList">
@@ -21,25 +22,26 @@
         <el-tab-pane name="continueIndex">
           <span slot="label"><i class="el-icon-date"></i> 连续行情</span>
           <el-checkbox-group v-model="checkList">
-            <el-checkbox v-for="k in Object.keys(val_dict).splice(13,26)" :label="k" @change="checkListChange(k)"><p>
+            <el-checkbox v-for="k in Object.keys(val_dict).splice(26,27)" :label="k" @change="checkListChange(k)"><p>
               {{ val_dict[k][0] }}</p>
             </el-checkbox>
           </el-checkbox-group>
         </el-tab-pane>
         <el-tab-pane name="otherIndex">
           <span slot="label"><i class="el-icon-pie-chart"></i> 其他指标</span>
-<!--          <el-checkbox-group v-model="checkList">-->
-<!--            <el-checkbox v-for="(v,k) in val_other_dict" :label="k" @change="checkListChange(k)"><p>{{ v[0] }}</p>-->
-<!--            </el-checkbox>-->
-<!--          </el-checkbox-group>-->
+          <!--          <el-checkbox-group v-model="checkList">-->
+          <!--            <el-checkbox v-for="(v,k) in val_other_dict" :label="k" @change="checkListChange(k)"><p>{{ v[0] }}</p>-->
+          <!--            </el-checkbox>-->
+          <!--          </el-checkbox-group>-->
           <p>更新中</p>
         </el-tab-pane>
 
         <el-tab-pane v-if="this.user" label="我的收藏" name="MyCollections">
           <span v-if="Object.keys(this.myCollections).length===0">暂无收藏指标</span>
-          <el-tag class="tag" v-for="name in Object.keys(this.myCollections)" :closable=true effect="light" @click="clickCollection(name)" @close="dropCollection">
+          <el-tag class="tag" v-for="name in Object.keys(this.myCollections)" :closable=true effect="light"
+                  @click="clickCollection(name)" @close="dropCollection">
             <el-button type="text">{{ name }}</el-button>
-            <el-dialog title="警告" :visible.sync="dropDialogVisible" width="25%" >
+            <el-dialog title="警告" :visible.sync="dropDialogVisible" width="25%">
               <span>是否删除该指标？</span>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="canDropColl(name)">取 消</el-button>
@@ -50,7 +52,9 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <el-divider content-position="left"><i class="el-icon-star-off"></i><span class="font" style="font-size: 15px;">筛选条件</span></el-divider>
+    <el-divider content-position="left"><i class="el-icon-star-off"></i><span class="font"
+                                                                              style="font-size: 15px;">筛选条件</span>
+    </el-divider>
     <el-card>
       <el-row :gutter="20">
         <el-col :span="5" align="middle" class="font">条件</el-col>
@@ -66,7 +70,8 @@
         <el-col :span="11" align="middle" class="slider">
           <el-input-number v-model="q.min" :controls="false" size="mini" :min="0" :max="q.con==='level'?1:2000"
                            :step="0.01" :precision="2" @change="numberChange(i)"></el-input-number>
-          <el-slider class="slider_color" style="width: 60%; float: left;" v-model="q.value" range :min=0 :max="q.con==='level'?1:2000"
+          <el-slider class="slider_color" style="width: 60%; float: left;" v-model="q.value" range :min=0
+                     :max="q.con==='level'?1:2000"
                      :step="0.01" @change="sliderChange(i)"></el-slider>
           <el-input-number v-model="q.max" :controls="false" size="mini" :min="0" :max="q.con==='level'?1:2000"
                            :step="0.01" :precision="2" @change="numberChange(i)"></el-input-number>
@@ -83,7 +88,8 @@
         </el-col>
         <el-col :span="5" v-if="q.con==='continues'" align="middle" class="years">
           <span>
-            <el-input-number v-model="q.years" :min="1" :max="10" :precision="0" size="mini"></el-input-number><span>年</span>
+            <el-input-number v-model="q.years" :min="1" :max="10" :precision="0"
+                             size="mini"></el-input-number><span>年</span>
           </span>
         </el-col>
         <el-col :span="3" align="middle">
@@ -92,12 +98,12 @@
 
       </el-row>
       <el-row>
-        <el-col :span="2" :offset="19" align="right">
+        <el-col :span="2" :offset="2" align="right">
           <span class="button">
-            <el-button  class="buttons" type="primary" :disabled="this.queries.length===0" @click="addCollections">添加至我的收藏</el-button>
+            <el-button class="buttons" type="primary" :disabled="this.queries.length===0" @click="addCollections">添加至我的收藏</el-button>
           </span>
         </el-col>
-        <el-col :span="2" :offset="19" align="right">
+        <el-col :span="2" :offset="15" align="right">
           <span class="button">
             <el-button class="buttons" type="primary" :disabled="this.queries.length===0" @click="reset">重 置</el-button>
           </span>
@@ -118,7 +124,7 @@ import {val_dict} from "../common/static";
 // import {val_level_dict} from '../common/static';
 import {con_dict} from '../common/static';
 import router from "@/router";
-import {getCollections} from "@/network/collections";
+import {getCollections} from "@/network/stocks";
 
 export default {
   name: "QuerySelector",
@@ -178,7 +184,20 @@ export default {
     tabClick(tab, event) {
       //ToDo 点击我的收藏，获取后端用户收藏数据
       if (tab.name === 'MyCollections') {
-        getCollections({uid: this.user, collections: this.myCollections})
+        getCollections().then(res => {
+          const queries = res.data['queries']
+          for (let q of queries) {
+            this.$set(this.myCollections,q.name,queries.filter(item => {
+              return item['name'] === q.name
+            }))
+            // this.myCollections[q['name']] = []
+          }
+          // for (let key in this.myCollections) {
+          //   this.myCollections[key] = queries.filter(q => {
+          //     return q['name'] === key
+          //   })
+          // }
+        })
       }
     },
     addCollections() {
@@ -190,24 +209,49 @@ export default {
             if (value.trim().length < 1) {
               return '输入不能为空'
             }
-            if (this.myCollections.hasOwnProperty(value)) {
-              return '存在同名指标，将进行覆盖!!!'
-            }
           },
           cancelButtonText: '取消',
-          inputErrorMessage: '邮箱格式不正确'
+          // inputErrorMessage: '邮箱格式不正确'
         }).then(({value}) => {
           value = value.trim()
-          let qs_clone = this.queries.map(item => item)
-          this.$set(this.myCollections, value, qs_clone)
-          console.log(this.myCollections)
-          //ToDo [value,qs_clone]写入后端数据库
-          this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
+          if (this.myCollections.hasOwnProperty(value)) {
+            this.$confirm('该名称已使用, 是否更新该指标?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              let qs_clone = this.queries.map(item => item)
+              this.$set(this.myCollections, value, qs_clone)
+              console.log(this.myCollections)
+              //ToDo [value,qs_clone]写入后端数据库
+              this.$message({
+                type: 'success', message: '成功更新指标: ' + value,
+              });
+            }).catch(() => {
+              this.$message({
+                type: 'info', message: '已取消更新'
+              });
+            });
+          } else {
+            let qs_clone = this.queries.map(item => item)
+            this.$set(this.myCollections, value, qs_clone)
+            console.log(this.myCollections)
+            //ToDo [value,qs_clone]写入后端数据库
+            this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
+          }
         }).catch(() => {
-          this.$message({type: 'info', message: '取消输入'});
+          this.$message({type: 'info', message: '取消收藏'});
         });
       } else {
-        router.push('/authenticate')
+        this.$confirm('是否跳转到登录页面?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          router.push('/authenticate')
+        }).catch(() => {
+          this.$message({type: 'info', message: '取消登录', duration: 1000});
+        });
       }
     },
     clickCollection(name) {
@@ -220,19 +264,18 @@ export default {
         checkTemp.push(arr_key[index])
       }
       this.checkList = checkTemp
-
     },
     dropCollection() {
       this.dropDialogVisible = true
 
     },
-    dropColl(name){
-      this.$delete(this.myCollections,name)
+    dropColl(name) {
+      this.$delete(this.myCollections, name)
       this.dropDialogVisible = false
       //ToDo 后端数据库删除该条收藏
     },
-    canDropColl(){
-     this.dropDialogVisible = false
+    canDropColl() {
+      this.dropDialogVisible = false
     },
     dropItem(i) {
       this.queries.splice(i, 1)
@@ -342,14 +385,17 @@ export default {
   float: right;
   margin-left: 10px;
 }
-.el-button.buttons{
+
+.el-button.buttons {
   background-color: #545c64;
-  border-color:#545c64;
+  border-color: #545c64;
 }
-.el-button.buttons:hover{
+
+.el-button.buttons:hover {
   color: #ffd04b;
 }
-.el-button.buttons:active{
+
+.el-button.buttons:active {
   color: #ffd04b;
 }
 
@@ -363,103 +409,118 @@ p {
   text-align: center;
   font-size: 14px;
 }
-  .font{
-    font-weight: bold;
-    color: #545c64;
-  }
+
+.font {
+  font-weight: bold;
+  color: #545c64;
+}
+
 [class^="el-icon"] {
   margin-right: 10px;
 }
-.but_color{
+
+.but_color {
   color: #545c64;
-  border-color:#dadbdc;
+  border-color: #dadbdc;
   background-color: #fff;
 }
-.el-button.but_color:hover{
+
+.el-button.but_color:hover {
   border-color: #dadbdc;
   background-color: #F5F5F5;
 }
-.el-button.but_color:active{
+
+.el-button.but_color:active {
   border-color: #dadbdc;
   background-color: #F5F5F5;
 }
 
 </style>
 <style>
-  /*标签页样式*/
-  .el-tabs__item {
-    padding: 0 20px;
-    height: 40px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    line-height: 40px;
-    display: inline-block;
-    list-style: none;
-    font-size: 14px;
-    font-weight: 600;
-    color: #545c64;
-    position: relative;
-  }
-  .el-tabs--card>.el-tabs__header {
-    /*border-bottom: 1px solid #545c64;*/
-    background-color: #fff;
-  }
-  .el-tabs__item.is-active {
-    color: #EEB422;
-  }
-  .el-tabs__item:hover {
-    color: #EEB422;
+/*标签页样式*/
+.el-tabs__item {
+  padding: 0 20px;
+  height: 40px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 40px;
+  display: inline-block;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #545c64;
+  position: relative;
+}
+
+.el-tabs--card > .el-tabs__header {
+  /*border-bottom: 1px solid #545c64;*/
+  background-color: #fff;
+}
+
+.el-tabs__item.is-active {
+  color: #EEB422;
+}
+
+.el-tabs__item:hover {
+  color: #EEB422;
   cursor: pointer;
-  }
-  /*滑块样式*/
-  .el-slider__bar {
-    background-color: #545c64;
-  }
-  .el-slider__button {
-    width: 13px;
-    height: 13px;
-    /*border-radius: 0;*/
-    background: #FFFFFF;
-    border: solid 2px #545c64;
-  }
-  /*checkbox样式*/
-  .el-checkbox {
-    color: #545c64;
-    /*border-color: #545c64;*/
-  }
-  .el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #545c64;
-    border-color: #545c64;
-  }
-  .el-checkbox__input.is-checked .el-checkbox__inner {
-    background-color: #545c64;
-    border-color: #545c64;
-  }
-  .unselected .el-checkbox__input .el-checkbox__inner::after {
-     border: 2px solid red;
-     box-sizing: content-box;
-       content: "";
-       border-left: 0;
-       border-top: 0;
-       height: 7px;
-       left: 3px;
-       position: absolute;
-       top: 1px;
-       width: 3px;
-  }
-  .el-checkbox__input .el-checkbox__inner::after {
+}
+
+/*滑块样式*/
+.el-slider__bar {
+  background-color: #545c64;
+}
+
+.el-slider__button {
+  width: 13px;
+  height: 13px;
+  /*border-radius: 0;*/
+  background: #FFFFFF;
+  border: solid 2px #545c64;
+}
+
+/*checkbox样式*/
+.el-checkbox {
+  color: #545c64;
+  /*border-color: #545c64;*/
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #545c64;
+  border-color: #545c64;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #545c64;
+  border-color: #545c64;
+}
+
+.unselected .el-checkbox__input .el-checkbox__inner::after {
+  border: 2px solid red;
+  box-sizing: content-box;
+  content: "";
+  border-left: 0;
+  border-top: 0;
+  height: 7px;
+  left: 3px;
+  position: absolute;
+  top: 1px;
+  width: 3px;
+}
+
+.el-checkbox__input .el-checkbox__inner::after {
   border: 2px solid #fff;
   box-sizing: content-box;
-    content: "";
-    border-left: 0;
-    border-top: 0;
-    height: 7px;
-    left: 3px;
-    position: absolute;
-    top: 1px;
-    width: 3px;
+  content: "";
+  border-left: 0;
+  border-top: 0;
+  height: 7px;
+  left: 3px;
+  position: absolute;
+  top: 1px;
+  width: 3px;
   transform: rotate(45deg) scaleY(1);
-  }
+}
 
 .tag {
   margin-left: 10px;
