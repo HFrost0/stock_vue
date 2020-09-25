@@ -13,7 +13,7 @@
         <el-tab-pane name="historyIndex">
           <span slot="label"><i class="el-icon-data-analysis"></i> 历史水平</span>
           <el-checkbox-group v-model="checkList">
-            <el-checkbox v-for="k in Object.keys(val_dict).splice(13,26)" :label="k" @change="checkListChange(k)"><p>
+            <el-checkbox v-for="k in Object.keys(val_dict).splice(13,13)" :label="k" @change="checkListChange(k)"><p>
               {{ val_dict[k][0] }}</p>
             </el-checkbox>
           </el-checkbox-group>
@@ -21,7 +21,7 @@
         <el-tab-pane name="continueIndex">
           <span slot="label"><i class="el-icon-date"></i> 连续行情</span>
           <el-checkbox-group v-model="checkList">
-            <el-checkbox v-for="k in Object.keys(val_dict).splice(26,27)" :label="k" @change="checkListChange(k)"><p>
+            <el-checkbox v-for="k in Object.keys(val_dict).splice(26,1)" :label="k" @change="checkListChange(k)"><p>
               {{ val_dict[k][0] }}</p>
             </el-checkbox>
           </el-checkbox-group>
