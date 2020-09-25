@@ -27,7 +27,7 @@ export const val_dict = {
   'total_mv_lev': ['历史总市值(万元)', 'total_mv','level'],
   'circ_mv_lev': ['历史流通市值(万元)', 'circ_mv','level'],
 
-  'dv_ratio_con': ['累计股息率', 'dv_ratio','continues'],
+  'dv_ratio_con': ['累计股息率', 'dv_ratio','continues']
 }
 
 // export const val_other_dict = {

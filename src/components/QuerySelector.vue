@@ -270,7 +270,7 @@ import {getCollections, get_range} from "@/network/stocks";
         get_range({val:val_dict[k][1]}).then(res=>{
           if (this.checkList.includes(k)) {
             let ran = Object.values(res.data)
-            console.log(ran);
+            ran = [Number(ran[0].toFixed(2)),Number(ran[1].toFixed(2))]
             this.query.val = val_dict[k][1]
             this.query.con = val_dict[k][2]
             this.query.years=1
@@ -287,17 +287,21 @@ import {getCollections, get_range} from "@/network/stocks";
               this.query.value=ran
               this.query.range=ran
             }
-
-            console.log(this.query);
-
+            this.queries=this.queries.filter(item=> {
+              return (item.val == val_dict[k][1] && item.con != val_dict[k][2])||(item.val != val_dict[k][1])
+            })
+            console.log(this.queries)
             this.queries.push(
                     JSON.parse(JSON.stringify(this.query))
             )
+            console.log(this.queries)
+
           }else {
-            // let index = this.queries.map(item => item.val).indexOf(k)
-            let index = this.queries.map(item => JSON.stringify([item.val, item.con])).indexOf(JSON.stringify([val_dict[k][1], val_dict[k][2]]))
-            // console.log(this.queries.map(item => (item.val, item.con))[2]==(val_dict[k][1], val_dict[k][2]))
-            this.queries.splice(index, 1)
+            // let index = this.queries.map(item => JSON.stringify([item.val, item.con])).indexOf(JSON.stringify([val_dict[k][1], val_dict[k][2]]))
+            // this.queries.splice(index, 1)
+            this.queries=this.queries.filter(item=> {
+             return (item.val == val_dict[k][1] && item.con != val_dict[k][2])||(item.val != val_dict[k][1])
+            })
           }
 
         })
@@ -316,15 +320,15 @@ import {getCollections, get_range} from "@/network/stocks";
         // 注意指针的问题
         this.$emit('filter', this.queries)
         // 清空query，同时确保指针更新
-        this.query = {
-          val: '',
-          con: '',
-          years: 1,
-          mouths: 1,
-          min_num: 0,
-          max_num: 2000,
-          value: [0, 2000],
-        }
+        // this.query = {
+        //   val: '',
+        //   con: '',
+        //   years: 1,
+        //   mouths: 1,
+        //   min_num: 0,
+        //   max_num: 2000,
+        //   value: [0, 2000],
+        // }
       },
       reset() {
         this.queries = []
