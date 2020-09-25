@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <el-tabs class="tabs" @tab-click="tabClick" v-model="activeName" tab-position="left" type="card" style="height: 260px;">
+      <el-tabs class="tabs" @tab-click="tabClick" v-model="activeName" tab-position="left" type="card" style="height: 250px;">
         <el-tab-pane name="basicIndex">
           <span slot="label"><i class="el-icon-data-line"></i> 当前行情</span>
           <el-checkbox-group v-model="checkList">
@@ -43,15 +43,15 @@
             <el-dialog title="警告" :visible.sync="dropDialogVisible" width="25%" >
               <span>是否删除该指标？</span>
               <span slot="footer" class="dialog-footer">
-                <el-button class="but_color" @click="canDropColl(name)">取 消</el-button>
-                <el-button class="buttons" type="primary" @click="dropColl(name)">确 定</el-button>
+                <el-button class="but_color" @click="canDropColl(name)" size="small">取 消</el-button>
+                <el-button class="buttons" type="primary" @click="dropColl(name)" size="small">确 定</el-button>
               </span>
             </el-dialog>
           </el-tag>
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font" style="font-size: 15px;">筛选条件</span></el-divider>
+    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font" style="font-size: 13px;">筛选条件</span></el-divider>
     <el-card>
       <el-row :gutter="20">
         <el-col :span="5" align="middle" class="font">条件</el-col>
@@ -65,18 +65,18 @@
           <p>{{ con_dict[q.con] }}{{ val_dict[q.val][0] }}</p>
         </el-col>
         <el-col :span="11" align="middle" class="slider">
-          <el-input-number v-model="q.min_num" :controls="false" size="mini" :min="0" :max="q.con==='level'?1:2000"
+          <el-input-number v-model="q.min_num" :controls="false" size="mini" :min="q.range[0]" :max="q.range[1]"
                            :step="0.01" :precision="2" @change="numberChange(i)"></el-input-number>
-          <el-slider class="slider_color" style="width: 60%; float: left;" v-model="q.value" range :min=0 :max="q.con==='level'?1:2000"
+          <el-slider class="slider_color" style="width: 60%; float: left;" v-model="q.value" range :min="q.range[0]" :max="q.range[1]"
                      :step="0.01" @change="sliderChange(i)"></el-slider>
-          <el-input-number v-model="q.max_num" :controls="false" size="mini" :min="0" :max="q.con==='level'?1:2000"
+          <el-input-number v-model="q.max_num" :controls="false" size="mini" :min="q.range[0]" :max="q.range[1]"
                            :step="0.01" :precision="2" @change="numberChange(i)"></el-input-number>
 
         </el-col>
         <el-col :span="5" v-if="q.con==='level'" align="middle" class="years">
           <span>
             <el-input-number v-model="q.mouths" :min="1" :max="24" :precision="0"
-                             size="mini"></el-input-number><span>月</span>
+                             size="mini"></el-input-number><span style="font-size: 13px;">月</span>
           </span>
         </el-col>
         <el-col :span="5" v-if="q.con==='current'" align="middle">
@@ -84,29 +84,29 @@
         </el-col>
         <el-col :span="5" v-if="q.con==='continues'" align="middle" class="years">
           <span>
-            <el-input-number v-model="q.years" :min="1" :max="10" :precision="0" size="mini"></el-input-number><span>年</span>
+            <el-input-number v-model="q.years" :min="1" :max="10" :precision="0" size="mini"></el-input-number><span style="font-size: 13px;">年</span>
           </span>
         </el-col>
         <el-col :span="3" align="middle">
-          <el-button class="but_color" icon="el-icon-delete-solid" size="medium " @click="dropItem(i)"></el-button>
+          <el-button class="but_color" icon="el-icon-delete-solid" size="small" @click="dropItem(i)"></el-button>
         </el-col>
 
       </el-row>
       <el-row>
         <el-col :span="2" :offset="2" align="right">
           <span class="button">
-            <el-button  class="buttons" type="primary" :disabled="this.queries.length===0" @click="addCollections">添加至我的收藏</el-button>
+            <el-button  class="buttons" type="primary" :disabled="this.queries.length===0" @click="addCollections" size="small">添加至我的收藏</el-button>
           </span>
         </el-col>
         <el-col :span="2" :offset="15" align="right">
           <span class="button">
-            <el-button class="buttons" type="primary" :disabled="this.queries.length===0" @click="reset">重 置</el-button>
+            <el-button class="buttons" type="primary" :disabled="this.queries.length===0" @click="reset" size="small">重 置</el-button>
           </span>
         </el-col>
         <el-col :span="2.5">
           <span class="button">
           <el-button class="buttons" type="primary" :disabled="this.queries.length===0" :loading="loading"
-                     @click="filter">开始选股</el-button>
+                     @click="filter" size="small">开始选股</el-button>
           </span>
         </el-col>
       </el-row>
@@ -119,7 +119,7 @@ import {val_dict} from "../common/static";
 // import {val_level_dict} from '../common/static';
 import {con_dict} from '../common/static';
 import router from "@/router";
-import {getCollections} from "@/network/stocks";
+import {getCollections, get_range} from "@/network/stocks";
 
   export default {
     name: "QuerySelector",
@@ -142,6 +142,7 @@ import {getCollections} from "@/network/stocks";
           min_num: 0,
           max_num: 2000,
           value: [0, 2000],
+          range:[0,2000]
         },
         queries: [],
         myCollections: {},
@@ -266,22 +267,41 @@ import {getCollections} from "@/network/stocks";
         this.checkList.splice(i, 1)
       },
       checkListChange(k) {
-        if (this.checkList.includes(k)) {
-          this.queries.push({
-            val: val_dict[k][1],
-            con: val_dict[k][2],
-            years: 1,
-            mouths: 1,
-            min_num: 0,
-            max_num: 2000,
-            value: [0, 2000]
-          })
-        } else {
-          // let index = this.queries.map(item => item.val).indexOf(k)
-          let index = this.queries.map(item => JSON.stringify([item.val, item.con])).indexOf(JSON.stringify([val_dict[k][1], val_dict[k][2]]))
-          // console.log(this.queries.map(item => (item.val, item.con))[2]==(val_dict[k][1], val_dict[k][2]))
-          this.queries.splice(index, 1)
-        }
+        get_range({val:val_dict[k][1]}).then(res=>{
+          if (this.checkList.includes(k)) {
+            let ran = Object.values(res.data)
+            console.log(ran);
+            this.query.val = val_dict[k][1]
+            this.query.con = val_dict[k][2]
+            this.query.years=1
+            this.query.mouths=1
+            if (val_dict[k][2]==='level'){
+              this.query.min_num=0
+              this.query.max_num=1
+              this.query.value=[0,1]
+              this.query.range=[0,1]
+            }
+            else {
+              this.query.min_num=ran[0]
+              this.query.max_num=ran[1]
+              this.query.value=ran
+              this.query.range=ran
+            }
+
+            console.log(this.query);
+
+            this.queries.push(
+                    JSON.parse(JSON.stringify(this.query))
+            )
+          }else {
+            // let index = this.queries.map(item => item.val).indexOf(k)
+            let index = this.queries.map(item => JSON.stringify([item.val, item.con])).indexOf(JSON.stringify([val_dict[k][1], val_dict[k][2]]))
+            // console.log(this.queries.map(item => (item.val, item.con))[2]==(val_dict[k][1], val_dict[k][2]))
+            this.queries.splice(index, 1)
+          }
+
+        })
+
 
 
       },
@@ -388,9 +408,10 @@ import {getCollections} from "@/network/stocks";
     display: block;
     line-height: 35px;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
   }
   .font{
+    font-size: 13px;
     font-weight: bold;
     color: #545c64;
   }
@@ -412,12 +433,18 @@ import {getCollections} from "@/network/stocks";
   }
   .button_text{
     color: #545c64;
+    font-size: 13px;
+
   }
   .el-button.button_text:hover{
     font-weight: bold;
   }
   .el-button.button_text:active{
     font-weight: bold;
+  }
+  .tag {
+    margin-left: 10px;
+    height: 40px;
   }
 
 
@@ -432,7 +459,7 @@ import {getCollections} from "@/network/stocks";
     line-height: 40px;
     display: inline-block;
     list-style: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #545c64;
     position: relative;
@@ -498,9 +525,6 @@ import {getCollections} from "@/network/stocks";
     transform: rotate(45deg) scaleY(1);
   }
 
-  .tag {
-    margin-left: 10px;
-    height: 40px;
-  }
+
 
 </style>

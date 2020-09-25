@@ -22,3 +22,4 @@ export function get_range(data) {
         params: data,
     })
 }
+

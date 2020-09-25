@@ -155,7 +155,7 @@
   .button_info {
     margin-top: 5%;
     margin-left: 2%;
-    font-size: 18px;
+    font-size: 15px;
     /*color: black;*/
     /*border-color: #545c64;*/
   }
@@ -184,7 +184,7 @@
     line-height: 40px;
     display: inline-block;
     list-style: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #545c64;
     position: relative;

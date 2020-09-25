@@ -6,7 +6,7 @@
       @sort-change="sortChange"
       @filter-change="filterChange"
       :data="shares_back"
-      style="width: 100%;"
+      style="width: 100%; font-size: 13px;"
       stripe
       :header-cell-style="{color: '#545c64'}">
       <el-table-column
@@ -184,6 +184,9 @@
 </script>
 
 <style scoped>
+  .link_color{
+    font-size: 13px;
+  }
   .el-link.link_color:hover{
     font-weight: bold;
   }

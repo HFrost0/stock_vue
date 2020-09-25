@@ -8,7 +8,7 @@
       v-loading="loading"
       @sort-change="sortChange"
       :data="stocks_back.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-      style="width: 100%"
+      style="width: 100%; font-size: 13px"
       stripe
       :header-cell-style="{color: '#545c64'}">
       <el-table-column
@@ -132,6 +132,9 @@ export default {
 </script>
 
 <style scoped>
+  .link_color{
+    font-size: 13px;
+  }
   .el-link.link_color:hover{
     font-weight: bold;
   }

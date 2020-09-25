@@ -25,7 +25,7 @@
 
 <style scoped>
   .info_style{
-    font-size: 30px;
+    font-size: 28px;
     margin-top: 6%;
     /*font-family: Helvetica;*/
     color: #545c64;font-weight: bold;

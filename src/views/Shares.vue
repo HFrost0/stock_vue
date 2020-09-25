@@ -173,7 +173,7 @@
   .font{
     font-weight: bold;
     color: #545c64;
-    font-size: 15px;
+    font-size: 13px;
   }
   .but_color{
     color: #545c64;
