@@ -9,10 +9,11 @@
         <el-input
                placeholder="输入股票代码或名称"
                v-model="search_text"
-               clearable>
+               clearable
+        size="small">
         </el-input>
         <el-col :span="1"></el-col>
-        <el-select v-model="time_type" placeholder="请选择日期筛选类型">
+        <el-select v-model="time_type" placeholder="请选择日期筛选类型" size="small">
           <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -24,22 +25,25 @@
         <el-col :span="1"></el-col>
         <el-date-picker
                 unlink-panels
+                size="small"
                 v-model="dates"
                 type="daterange"
                 range-separator="至"
                 start-placeholder="开始日期"
-                end-placeholder="结束日期">
+                end-placeholder="结束日期"
+        >
         </el-date-picker>
 
         <el-col :span="1"></el-col>
 
-        <el-button class="but_color" @click="dateRange">GO</el-button>
+        <el-button class="but_color" @click="dateRange" size="small">GO</el-button>
 
 
       </el-row>
       </el-card>
+      <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的股票</span></el-divider>
     </div>
-    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的股票</span></el-divider>
+
     <el-card>
     <share-list
       ref="share_list"
@@ -188,5 +192,6 @@
     border-color: #dadbdc;
     background-color: #F5F5F5;
   }
+
 
 </style>
