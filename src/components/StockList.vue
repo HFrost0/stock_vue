@@ -15,6 +15,7 @@
         v-for="(value, key) in show_dict"
         :prop="key"
         :label="value"
+        align="center"
         :sortable="['symbol', 'name', 'area', 'industry'].indexOf(key)===-1"
       >
         <template

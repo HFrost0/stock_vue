@@ -8,8 +8,10 @@
       :data="shares_back"
       style="width: 100%; font-size: 13px;"
       stripe
-      :header-cell-style="{color: '#545c64'}">
+      :header-cell-style="{color: '#545c64'}"
+    >
       <el-table-column
+              align="center"
         prop="ts_code_id"
         label="股票代码">
         <template slot-scope="scope">
@@ -19,26 +21,31 @@
       </el-table-column>
       <el-table-column
         prop="name"
-        label="名称">
+        label="名称"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="end_date"
-        label="分红年度">
+        label="分红年度"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="ann_date"
-        label="预案公告日">
+        label="预案公告日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="imp_ann_date"
-        label="实施公告日">
+        label="实施公告日"
+        align="center">
       </el-table-column>
       <el-table-column
         prop="div_proc"
         label="实施进度"
+        align="center"
         :column-key="'div_proc'"
         :filters="[
                 { text: '实施', value: '实施' },
@@ -52,57 +59,68 @@
       <el-table-column
         sortable="custom"
         prop="stk_div"
-        label="每股转送">
+        label="每股转送"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="stk_bo_rate"
-        label="每股转送比例">
+        label="每股转送比例"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="stk_co_rate"
-        label="每股转增比例">
+        label="每股转增比例"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="cash_div"
-        label="每股分红（税后）">
+        label="每股分红（税后）"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="cash_div_tax"
-        label="每股分红（税前）">
+        label="每股分红（税前）"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="record_date"
-        label="股权登记日">
+        label="股权登记日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="ex_date"
-        label="除权登记日">
+        label="除权登记日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="pay_date"
-        label="派息日">
+        label="派息日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="div_listdate"
-        label="红股上市日">
+        label="红股上市日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="base_date"
-        label="基准日">
+        label="基准日"
+        align="center">
       </el-table-column>
       <el-table-column
         sortable="custom"
         prop="base_share"
-        label="基准股本（万）">
+        label="基准股本（万）"
+        align="center">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -193,4 +211,6 @@
   .el-link.link_color:active{
     font-weight: bold;
   }
+
+
 </style>

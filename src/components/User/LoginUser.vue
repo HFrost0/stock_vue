@@ -7,14 +7,14 @@
       <p v-if="status === 400">
         Invalid login.
       </p>
-      <el-form-item label="用户名">
-        <el-input v-model="username"></el-input>
+      <el-form-item label="用户名:">
+        <el-input v-model="username" size="small"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="password" autocomplete="off"></el-input>
+      <el-form-item label="密码:" prop="pass">
+        <el-input type="password" v-model="password" autocomplete="off" size="small"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button class="but_color" @click="login">登录</el-button>
+      <el-form-item align="right">
+        <el-button class="but_color" @click="login" size="small">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

@@ -7,17 +7,17 @@
       <p v-if="status === 400">
         Invalid registry.
       </p>
-      <el-form-item label="用户名">
-        <el-input v-model="ruleForm.username"></el-input>
+      <el-form-item label="用户名:">
+        <el-input v-model="ruleForm.username" size="small"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+      <el-form-item label="密码:" prop="pass">
+        <el-input type="password" v-model="ruleForm.pass" autocomplete="off" size="small"></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+      <el-form-item label="确认密码:" prop="checkPass">
+        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" size="small"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button class="but_color" @click="registry('ruleForm')">提交</el-button>
+      <el-form-item align="right">
+        <el-button class="but_color" @click="registry('ruleForm')" size="small">提交</el-button>
       </el-form-item>
     </el-form>
   </div>

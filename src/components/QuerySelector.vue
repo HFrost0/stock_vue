@@ -40,7 +40,7 @@
           <span v-if="Object.keys(this.myCollections).length===0">暂无收藏指标</span>
           <el-tag class="tag" type="info" v-for="name in Object.keys(this.myCollections)" :closable=true effect="light" @click="clickCollection(name)" @close="dropCollection">
             <el-button type="text" class="button_text">{{ name }}</el-button>
-            <el-dialog title="警告" :visible.sync="dropDialogVisible" width="25%" >
+            <el-dialog title="删除指标" :visible.sync="dropDialogVisible" width="25%" >
               <span>是否删除该指标？</span>
               <span slot="footer" class="dialog-footer">
                 <el-button class="but_color" @click="canDropColl(name)" size="small">取 消</el-button>
@@ -188,7 +188,7 @@ import {getCollections, get_range} from "@/network/stocks";
       },
       addCollections() {
         if (this.user) {
-          this.$prompt('请输入指标名称', '提示', {
+          this.$prompt('请输入指标名称', '新建指标', {
             inputPlaceholder: '指标名称',
             confirmButtonText: '确定',
             inputValidator: (value) => {
@@ -201,7 +201,7 @@ import {getCollections, get_range} from "@/network/stocks";
           }).then(({value}) => {
             value = value.trim()
             if(this.myCollections.hasOwnProperty(value)){
-              this.$confirm('该名称已使用, 是否更新该指标?', '提示', {
+              this.$confirm('该指标名称已使用, 是否更新该指标?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 // type: 'warning'
