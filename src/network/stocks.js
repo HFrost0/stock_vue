@@ -22,4 +22,10 @@ export function get_range(data) {
         params: data,
     })
 }
+export function saveCollection(data){
+    return request({
+        url: "/save_user_queries",
+        method:'POST',
+    })
+}
 
