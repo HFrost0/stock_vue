@@ -276,6 +276,7 @@ export default {
 
     },
 
+
     warnDropCollection(name) {
       // console.log(name)
       // this.dropDialogVisible = true
@@ -499,13 +500,17 @@ p {
 
 }
 
-.el-button.button_text:hover {
+.button_text:hover {
   font-weight: bold;
+    color: #EEB422;
 }
 
-.el-button.button_text:active {
+.button_text:active {
   font-weight: bold;
+    color: #EEB422;
+
 }
+/*.active1 {color: red}*/
 
 .tag {
   margin-left: 10px;
