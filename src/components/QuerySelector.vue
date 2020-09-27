@@ -40,15 +40,15 @@
           <span slot="label"><i class="el-icon-star-off"></i> 我的收藏</span>
           <span v-if="Object.keys(this.myCollections).length===0">暂无收藏指标</span>
           <el-tag class="tag" type="info" v-for="name in Object.keys(this.myCollections)" :closable=true effect="light"
-                  @click="clickCollection(name)" @close="warnDropCollection">
+                  @click="clickCollection(name)" @close="warnDropCollection(name)">
             <el-button type="text" class="button_text">{{ name }}</el-button>
-            <el-dialog title="删除指标" :visible.sync="dropDialogVisible" width="25%">
-              <span>是否删除该指标？</span>
-              <span slot="footer" class="dialog-footer">
-    <el-button class="but_color" @click="canDropColl(name)" size="small">取 消</el-button>
-  <el-button class="buttons" type="primary" @click="dropColl(name)" size="small">确 定</el-button>
-</span>
-            </el-dialog>
+<!--            <el-dialog title="删除指标" :visible.sync="dropDialogVisible" width="25%">-->
+<!--              <span>是否删除该指标？</span>-->
+<!--              <span slot="footer" class="dialog-footer">-->
+<!--                <el-button class="but_color" @click="canDropColl(name)" size="small">取 消{{name}}</el-button>-->
+<!--                <el-button class="buttons" type="primary" @click="dropColl(name)" size="small">确 定{{name}}</el-button>-->
+<!--              </span>-->
+<!--            </el-dialog>-->
           </el-tag>
         </el-tab-pane>
       </el-tabs>
@@ -130,7 +130,7 @@ export default {
   name: "QuerySelector",
   data() {
     return {
-      dropDialogVisible: false,
+      // dropDialogVisible: false,
       loading: false,
       activeName: 'basicIndex',
       checkList: [],
@@ -220,9 +220,9 @@ export default {
                     delete q['value']
                     q['name']=value
                 }
-                console.log(qs_clone)
+                // console.log(qs_clone)
                 saveCollection({"queries": qs_clone}).then(res=>{
-                  console.log(res)
+                  // console.log(res)
                 })
 
               this.$message({
@@ -237,15 +237,14 @@ export default {
             let qs_clone = this.queries.map(item => item)
             this.$set(this.myCollections, value, qs_clone)
             // console.log(this.myCollections)
-            console.log(qs_clone);
+            // console.log(qs_clone);
             //ToDo [value,qs_clone]写入后端数据库
               for(let q of qs_clone){
                         delete q['value']
                         q['name']=value
                     }
-              console.log(qs_clone)
-              saveCollection({"queries": qs_clone}).then(res=>{
-                console.log(res)})
+              // console.log(qs_clone)
+              saveCollection({"queries": qs_clone}).then()
             this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
           }
         }).catch(() => {
@@ -277,20 +276,44 @@ export default {
 
     },
 
-    warnDropCollection() {
-      this.dropDialogVisible = true
+    warnDropCollection(name) {
+      // console.log(name)
+      // this.dropDialogVisible = true
+
+        this.$confirm('将永久删除指标"'+name+'", 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          // console.log(name)
+          this.$delete(this.myCollections, name)
+          //ToDo 后端数据库删除该条收藏
+          delCollection({"name":name})
+          this.$message({
+            type: 'success',
+            message: '成功删除指标"'+name+'"!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消删除指标"'+name+'"'
+          });
+        });
+
 
     },
-    dropColl(name) {
-      this.$delete(this.myCollections, name)
-      this.dropDialogVisible = false
-      //ToDo 后端数据库删除该条收藏
-      delCollection({"name":name})
-
-    },
-    canDropColl() {
-      this.dropDialogVisible = false
-    },
+    // dropColl(name) {
+    //   // console.log(name)
+    //   this.$delete(this.myCollections, name)
+    //   this.dropDialogVisible = false
+    //   //ToDo 后端数据库删除该条收藏
+    //   delCollection({"name":name})
+    //
+    // },
+    // canDropColl(name) {
+    //   console.log(name)
+    //   this.dropDialogVisible = false
+    // },
     dropItem(i) {
       this.queries.splice(i, 1)
       this.checkList.splice(i, 1)
