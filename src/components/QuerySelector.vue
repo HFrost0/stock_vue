@@ -124,6 +124,7 @@
 import {query_dict, val_dict,con_dict} from "../common/static";
 import router from "@/router";
 import {getCollections,saveCollection, get_range} from "@/network/stocks";
+import {getStocks} from "../network/stocks";
 
 export default {
   name: "QuerySelector",
@@ -182,7 +183,7 @@ export default {
       if (tab.name === 'MyCollections') {
         getCollections().then(res => {
           let collections = res.data['queries']
-          collections = collections.map(item=>Object.assign({},item,{value:item.con==="level"?[0,1]:[item.min_num,item.max_num]}))
+          collections = collections.map(item=>Object.assign({},item,{value:[item.min_num,item.max_num]}))
           for (let q of collections) {
             this.$set(this.myCollections, q.name, collections.filter(item => {
               return item['name'] === q.name}))
@@ -212,10 +213,16 @@ export default {
             }).then(() => {
               let qs_clone = this.queries.map(item => item)
               this.$set(this.myCollections, value, qs_clone)
-              // console.log(this.myCollections)
+              console.log(this.myCollections)
+              console.log(qs_clone)
               //ToDo [value,qs_clone]写入后端数据库
+                for(let q of qs_clone){
+                    delete q['value']
+                    q['name']=value
+                }
+                console.log(qs_clone)
+                saveCollection({"queries": qs_clone})
 
-              saveCollection()
               this.$message({
                 type: 'success', message: '成功更新指标: ' + value,
               });
@@ -230,6 +237,12 @@ export default {
             // console.log(this.myCollections)
             console.log(qs_clone);
             //ToDo [value,qs_clone]写入后端数据库
+              for(let q of qs_clone){
+                        // delete q['value']
+                        q['name']=value
+                    }
+              console.log(qs_clone)
+              saveCollection({"queries": qs_clone})
             this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
           }
         }).catch(() => {
