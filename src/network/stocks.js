@@ -30,9 +30,10 @@ export function saveCollection(data){
     })
 }
 
-export function get_range(params) {
+export function delCollection(params) {
     return request({
         url:'/del_user_queries',
+        method:'POST',
         params: params,
     })
 }
