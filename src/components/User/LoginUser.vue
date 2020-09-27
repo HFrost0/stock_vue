@@ -14,7 +14,7 @@
       <p v-if="status === 400" style="color: red;font-size: small">
         该用户不存在或密码错误！
       </p>
-      <el-form-item align="center">
+      <el-form-item align="right">
         <el-button class="but_color" native-type="submit" @click="login" size="small">登录</el-button>
       </el-form-item>
 

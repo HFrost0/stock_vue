@@ -41,7 +41,7 @@
           <span v-if="Object.keys(this.myCollections).length===0">暂无收藏指标</span>
           <el-tag class="tag" type="info" v-for="name in Object.keys(this.myCollections)" :closable=true effect="light"
                   @click="clickCollection(name)" @close="warnDropCollection(name)">
-            <el-button type="text" class="button_text">{{ name }}</el-button>
+            <el-button type="text"  class="button_text" >{{ name }}</el-button>
 <!--            <el-dialog title="删除指标" :visible.sync="dropDialogVisible" width="25%">-->
 <!--              <span>是否删除该指标？</span>-->
 <!--              <span slot="footer" class="dialog-footer">-->
@@ -53,8 +53,7 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font"
-                                                                            style="font-size: 13px;">筛选条件</span>
+    <el-divider content-position="left"><i class="el-icon-search"></i><span class="font" style="font-size: 13px;">筛选条件{{colName}}</span>
     </el-divider>
     <el-card>
       <el-row :gutter="20">
@@ -133,6 +132,7 @@ export default {
       // dropDialogVisible: false,
       loading: false,
       activeName: 'basicIndex',
+      colName:"",
       checkList: [],
       // value: [0, 2000],
       val_dict,
@@ -244,7 +244,8 @@ export default {
                         q['name']=value
                     }
               // console.log(qs_clone)
-              saveCollection({"queries": qs_clone}).then()
+              saveCollection({"queries": qs_clone}).then(res=>{
+                console.log(res)})
             this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
           }
         }).catch(() => {
@@ -263,6 +264,7 @@ export default {
       }
     },
     clickCollection(name) {
+      this.colName="（当前指标为 <"+name+">）"
       this.queries = this.myCollections[name].map(item => item)
       let arr_value = this.queries.map(item => [item.val, item.con])
       let arr_key = Object.keys(this.val_dict)
@@ -288,6 +290,7 @@ export default {
         }).then(() => {
           // console.log(name)
           this.$delete(this.myCollections, name)
+          this.colName=''
           //ToDo 后端数据库删除该条收藏
           delCollection({"name":name})
           this.$message({
@@ -316,10 +319,12 @@ export default {
     //   this.dropDialogVisible = false
     // },
     dropItem(i) {
+      this.colName=''
       this.queries.splice(i, 1)
       this.checkList.splice(i, 1)
     },
     checkListChange(k) {
+      this.colName=''
       get_range({val: val_dict[k][1]}).then(res => {
         if (this.checkList.includes(k)) {
           let ran = Object.values(res.data)
@@ -380,6 +385,7 @@ export default {
       // }
     },
     reset() {
+      this.colName=''
       this.queries = []
       this.checkList = []
       this.$emit('reset')
