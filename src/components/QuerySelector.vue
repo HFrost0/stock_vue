@@ -123,7 +123,7 @@
 <script>
 import {query_dict, val_dict,con_dict} from "../common/static";
 import router from "@/router";
-import {getCollections,saveCollection, get_range} from "@/network/stocks";
+import {getCollections,saveCollection,delCollection, get_range} from "@/network/stocks";
 import {getStocks} from "../network/stocks";
 
 export default {
@@ -221,7 +221,9 @@ export default {
                     q['name']=value
                 }
                 console.log(qs_clone)
-                saveCollection({"queries": qs_clone})
+                saveCollection({"queries": qs_clone}).then(res=>{
+                  console.log(res)
+                })
 
               this.$message({
                 type: 'success', message: '成功更新指标: ' + value,
@@ -238,11 +240,12 @@ export default {
             console.log(qs_clone);
             //ToDo [value,qs_clone]写入后端数据库
               for(let q of qs_clone){
-                        // delete q['value']
+                        delete q['value']
                         q['name']=value
                     }
               console.log(qs_clone)
-              saveCollection({"queries": qs_clone})
+              saveCollection({"queries": qs_clone}).then(res=>{
+                console.log(res)})
             this.$message({type: 'success', message: '已收藏指标: ' + value, duration: 2000});
           }
         }).catch(() => {
@@ -282,6 +285,8 @@ export default {
       this.$delete(this.myCollections, name)
       this.dropDialogVisible = false
       //ToDo 后端数据库删除该条收藏
+      delCollection({"name":name})
+
     },
     canDropColl() {
       this.dropDialogVisible = false

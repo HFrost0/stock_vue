@@ -33,7 +33,7 @@ export function saveCollection(data){
 export function delCollection(params) {
     return request({
         url:'/del_user_queries',
-        method:'POST',
+        method:'GET',
         params: params,
     })
 }
