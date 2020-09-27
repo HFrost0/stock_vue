@@ -26,6 +26,7 @@ export function saveCollection(data){
     return request({
         url: "/save_user_queries",
         method:'POST',
+        data: data,
     })
 }
 

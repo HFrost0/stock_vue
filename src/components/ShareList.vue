@@ -204,13 +204,22 @@
 <style scoped>
   .link_color{
     font-size: 13px;
+    color: #0366D6;
   }
   .el-link.link_color:hover{
-    font-weight: bold;
+    /*font-weight: bold;*/
+    color: #0366D6;
   }
   .el-link.link_color:active{
-    font-weight: bold;
+    /*font-weight: bold;*/
+    color: #0366D6;
   }
 
+</style>
+<style>
+  .el-pager li.active,.el-pager li:hover,
+  .el-pagination button:hover {
+    color: #0366D6;
+  }
 
 </style>
