@@ -29,3 +29,9 @@ export function saveCollection(data){
     })
 }
 
+export function get_range(params) {
+    return request({
+        url:'/del_user_queries',
+        params: params,
+    })
+}
