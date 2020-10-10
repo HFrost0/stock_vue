@@ -5,7 +5,7 @@ import router from '../router'
 
 const instance = axios.create({
   // baseURL: 'http://127.0.0.1:8000/stock/api',
-  baseURL: 'http://47.92.214.87:8000/stock/api',
+  baseURL: 'https://csubigdata.com/stock_web/stock/api',
   paramsSerializer: params => {
     return qs.stringify(params, {indices: false})
   }
