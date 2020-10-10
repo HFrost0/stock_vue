@@ -60,16 +60,16 @@
           prop: 'trade_date',
           order: 'descending',
           offset: 0,
-          page_size: 10,
+          page_size: 15,
         },
         share_total: 0,
         shares: [],
         share_context: {
           ts_code: '',
-          prop: 'imp_ann_date',
+          prop: 'ann_date',
           order: 'descending',
           offset: 0,
-          page_size: 10,
+          page_size: 15,
           proc_filter: [],
         }
       };
