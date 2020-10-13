@@ -156,7 +156,11 @@ export default {
   created() {
     for (let val of Object.keys(query_dict)) {
       get_range({val: val}).then(res => {
-        this.$set(this.limits, val, Object.values(res.data).map(item=>Number(item.toFixed(2))))
+        let l = Object.values(res.data)[0].toFixed(3)
+        let r = (Object.values(res.data)[1]+0.01).toFixed(3)
+        l = Number(l.substring(0,l.length-1))
+        r = Number(r.substring(0,r.length-1))
+        this.$set(this.limits, val, [l,r])
       })
     }
   },
@@ -328,7 +332,9 @@ export default {
       get_range({val: val_dict[k][1]}).then(res => {
         if (this.checkList.includes(k)) {
           let ran = Object.values(res.data)
-          ran = [Number(ran[0].toFixed(2)), Number(ran[1].toFixed(2))]
+          let ran0 = ran[0].toFixed(3)
+          let ran1 = (ran[1]+0.01).toFixed(3)
+          ran = [Number(ran0.substring(0,ran0.length-1)), Number(ran1.substring(0,ran1.length-1))]
           this.query.val = val_dict[k][1]
           this.query.con = val_dict[k][2]
           this.query.years = 1
