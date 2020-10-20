@@ -269,7 +269,7 @@ export default {
     },
     clickCollection(name) {
       this.colName="（当前指标为 <"+name+">）"
-      this.queries = this.myCollections[name].map(item => item)
+      this.queries = JSON.parse(JSON.stringify(this.myCollections[name]))
       let arr_value = this.queries.map(item => [item.val, item.con])
       let arr_key = Object.keys(this.val_dict)
       let checkTemp = []
