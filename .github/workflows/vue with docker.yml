@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.cn-shanghai.aliyuncs.com
           repository: hfrost/stock_vue
-          tags: 2.0
+          tags: 2
 
       - name: connect server and pull image
         uses: appleboy/ssh-action@master
@@ -33,6 +33,6 @@ jobs:
           script: |
             docker stop stock_vue2.0
             docker rm stock_vue2.0
-            docker pull registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2.0
-            docker run -d -p 8001:80 --name stock_vue2.0 registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2.0
+            docker pull registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2
+            docker run -d -p 8001:80 --name stock_vue2.0 registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2
 
