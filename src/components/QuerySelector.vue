@@ -120,10 +120,9 @@
 </template>
 
 <script>
-import {query_dict, val_dict,con_dict} from "../common/static";
+import {query_dict, val_dict,con_dict} from "@/common/static";
 import router from "@/router";
 import {getCollections,saveCollection,delCollection, get_range} from "@/network/stocks";
-import {getStocks} from "../network/stocks";
 
 export default {
   name: "QuerySelector",
@@ -217,14 +216,11 @@ export default {
             }).then(() => {
               let qs_clone = this.queries.map(item => item)
               this.$set(this.myCollections, value, qs_clone)
-              console.log(this.myCollections)
-              console.log(qs_clone)
               //ToDo [value,qs_clone]写入后端数据库
                 for(let q of qs_clone){
                     delete q['value']
                     q['name']=value
                 }
-                // console.log(qs_clone)
                 saveCollection({"queries": qs_clone}).then(res=>{
                   // console.log(res)
                 })

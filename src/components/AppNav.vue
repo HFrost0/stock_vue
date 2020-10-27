@@ -63,7 +63,6 @@ export default {
       this.$router.push('/authenticate')
     },
     userSpace(){
-      console.log('user space');
       this.$router.push('/user_space')
     }
   }

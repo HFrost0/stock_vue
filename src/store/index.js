@@ -35,7 +35,6 @@ export default new Vuex.Store({
     registry({commit}, credentials) {
       return registry(credentials).then(({data}) => {
         commit('SET_USER_DATA', data)
-        console.log(data)
       })
     },
     logout({commit}) {

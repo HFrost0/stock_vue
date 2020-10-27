@@ -63,7 +63,8 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
+  base: process.env.NODE_ENV === 'production' ? '/xgq/' : '/',
 })
 
 //全局守卫修改标题,前置钩子

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import {con_dict, val_dict} from "../common/static";
+  import {con_dict, val_dict} from "@/common/static";
 
   export default {
     name: "QueryItem",

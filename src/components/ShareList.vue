@@ -136,7 +136,7 @@
 
 <script>
 
-  import {formatDate} from "../common/utils";
+  import {formatDate} from "@/common/utils";
 
   export default {
     name: "ShareList",
@@ -184,7 +184,6 @@
         })
       },
       handleCurrentChange(currentPage) {
-        console.log('page change')
         this.currentPage = currentPage
         // 请求服务端刷新数据
         const offset = (currentPage - 1) * this.pageSize

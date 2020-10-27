@@ -1,20 +1,20 @@
 name: Vue deployment with docker and ssh
 on: [push]
-jobs: 
+jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        
+
       - name: setup node
         uses: actions/setup-node@v1
         with:
           node-version: '14'
       - run: npm install
       - run: npm run build
-        
+
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
         with:
@@ -22,8 +22,8 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           registry: registry.cn-shanghai.aliyuncs.com
           repository: hfrost/stock_vue
-          tags: latest
-          
+          tags: 2.0
+
       - name: connect server and pull image
         uses: appleboy/ssh-action@master
         with:
@@ -31,8 +31,8 @@ jobs:
           username: ${{ secrets.USER_NAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            docker stop stock_vue
-            docker rm stock_vue
-            docker pull registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:latest
-            docker run -d -p 80:80 --name stock_vue registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:latest
+            docker stop stock_vue2.0
+            docker rm stock_vue2.0
+            docker pull registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2.0
+            docker run -d -p 8001:80 --name stock_vue2.0 registry.cn-shanghai.aliyuncs.com/hfrost/stock_vue:2.0
 

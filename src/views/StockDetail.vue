@@ -43,7 +43,7 @@
   import StockInfo from "../components/StockInfo";
   import DailyList from "../components/DailyList";
   import ShareList from "../components/ShareList";
-  import {getShareList, getStock, getStockDaily} from "../network/stock_detail";
+  import {getShareList, getStock, getStockDaily} from "@/network/stock_detail";
 
   export default {
     name: "StockDetail",
@@ -133,7 +133,6 @@
       //   this.stock = res.data['stock']
       // })
       getShareList(this.share_context).then(res => {
-        console.log(res)
         this.share_total = res.data['total']
         this.shares = res.data['shares']
         this.$refs.share_list.loading = false

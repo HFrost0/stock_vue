@@ -21,7 +21,7 @@
   import QuerySelector from "../components/QuerySelector";
   import QueryItem from "../components/QueryItem";
   import StockList from "../components/StockList";
-  import {getStocks} from "../network/stocks";
+  import {getStocks} from "@/network/stocks";
 
   export default {
     name: "Stocks",

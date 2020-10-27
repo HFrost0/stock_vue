@@ -41,7 +41,7 @@
 
       </el-row>
       </el-card>
-      <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的股票</span></el-divider>
+      <el-divider content-position="left"><i class="el-icon-search"></i><span class="font">符合条件的分红</span></el-divider>
     </div>
 
     <el-card>
@@ -59,7 +59,7 @@
 
 <script>
   import ShareList from "../components/ShareList";
-  import {getShareList} from "../network/shares";
+  import {getShareList} from "@/network/shares";
   // import {debounce} from "../common/utils";
 
   export default {

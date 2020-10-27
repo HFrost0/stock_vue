@@ -40,8 +40,8 @@
 
 <script>
 
-import {formatDate} from "../common/utils";
-import {stock_dict, query_dict} from "../common/static";
+import {formatDate} from "@/common/utils";
+import {stock_dict, query_dict} from "@/common/static";
 
 
 export default {

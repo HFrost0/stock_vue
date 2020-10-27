@@ -40,6 +40,5 @@ export function request(config) {
     }
     return Promise.reject(error)
   })
-  console.log(config)
   return instance(config)
 }
